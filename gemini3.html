@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER-GEN | 未來科技自媒體旗艦基地 (2026 NEXT-GEN MEDIA)</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Cyber-Gen 未來科技自媒體旗艦基地 - 專注於AI演進趨勢、科技戰略與數位游牧的高效流派。">
+    <meta name="keywords" content="Cyber-Gen, AI自動化, 科技自媒體, 數位游牧, 獨立創作者, 生產力工具">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CYBER-GEN | 未來科技自媒體旗艦基地">
+    <meta property="og:description" content="拆解AI演進趨勢、科技戰略與數位游牧的高效流派。每週陪伴全球超過 50 萬名先行者破局成長。">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&h=630&q=80">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="CYBER-GEN | 未來科技自媒體旗艦基地">
+    <meta property="twitter:description" content="拆解AI演進趨勢、科技戰略與數位游牧的高效流派。">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Orbitron & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        cyber: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        cyberBg: '#06060b',
+                        cyberCard: '#0b0d16',
+                        cyberCardLight: '#121624',
+                        cyberGreen: '#00ff66',
+                        cyberBlue: '#00f0ff',
+                        cyberPurple: '#bd00ff',
+                    },
+                    boxShadow: {
+                        neonGreen: '0 0 15px rgba(0, 255, 102, 0.4)',
+                        neonBlue: '0 0 15px rgba(0, 240, 255, 0.4)',
+                        neonPurple: '0 0 15px rgba(189, 0, 255, 0.4)',
+                        neonGreenGlow: '0 0 25px rgba(0, 255, 102, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 賽博朋克 Glitch 效果 */
+        .glitch-hover:hover {
+            animation: glitch 0.3s linear infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+        /* 自訂隱藏捲動條但保有功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-cyberBg text-gray-200 font-sans antialiased selection:bg-cyberBlue selection:text-black transition-colors duration-300">
+
+    <!-- 粒子背景裝飾 -->
+    <div class="fixed inset-0 pointer-events-none opacity-25 z-0 bg-[radial-gradient(#1e1b4b_1.5px,transparent_1.5px)] [background-size:24px_24px]"></div>
+
+    <!-- 🧭 頂部導航欄 -->
+    <nav class="sticky top-0 z-50 backdrop-blur-xl bg-cyberBg/80 border-b border-gray-900 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="font-cyber font-black text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyberBlue to-cyberGreen">
+                CYBER<span class="text-white">-</span>GEN
+            </a>
+            <div class="hidden md:flex space-x-8 font-cyber text-sm tracking-widest text-gray-400">
+                <a href="#" class="hover:text-cyberBlue transition-colors">[首頁 / Home]</a>
+                <a href="#about" class="hover:text-cyberBlue transition-colors">[創作者檔案 / Codex]</a>
+                <a href="#featured" class="hover:text-cyberBlue transition-colors">[熱門爆款 / Alpha]</a>
+                <a href="#ecosystem" class="hover:text-cyberBlue transition-colors">[跨平台矩陣 / Hub]</a>
+                <a href="#cta" class="hover:text-cyberBlue transition-colors">[情報補給 / CTA]</a>
+            </div>
+            <a href="#cta" class="font-cyber text-xs border border-cyberGreen px-4 py-2 text-cyberGreen shadow-neonGreen hover:bg-cyberGreen hover:text-black transition-all duration-300">
+                LIVE_FEED
+            </a>
+        </div>
+    </nav>
+
+    <!-- ⚡ 1. 核心看板 Hero Section -->
+    <header class="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden z-10">
+        <div class="max-w-5xl text-center space-y-8">
+            <div class="inline-block border border-cyberBlue/30 bg-cyberBlue/5 px-4 py-1.5 rounded-full text-xs font-cyber tracking-widest text-cyberBlue mb-4">
+                <i class="fa-solid fa-bolt-lightning mr-2 animate-pulse"></i>2026 NEXT-GEN MEDIA PLATFORM
+            </div>
+            <h1 class="font-cyber font-black text-4xl md:text-6xl lg:text-7xl tracking-tight leading-tight text-white">
+                用解碼前沿科技的視角<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyberBlue via-cyberPurple to-cyberGreen">
+                    重塑未來的商業想像
+                </span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed">
+                我是 <span class="text-white font-semibold">Cyber-Gen</span>。在這裡，我透過深度影音與核心專欄，拆解 <span class="text-cyberBlue font-medium">AI演進趨勢</span>、<span class="text-cyberPurple font-medium">科技戰略</span>與<span class="text-cyberGreen font-medium">數位游牧</span>的高效流派。每週陪伴全球超過 50 萬名先行者破局成長。
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 font-cyber">
+                <a href="#featured" class="w-full sm:w-auto bg-gradient-to-r from-cyberBlue to-cyberPurple text-black font-bold px-8 py-4 shadow-neonBlue hover:brightness-125 transition-all text-center tracking-wider">
+                    [ 🎬 解碼熱門影片 ]
+                </a>
+                <a href="#cta" class="w-full sm:w-auto border border-gray-800 bg-black/40 text-gray-300 px-8 py-4 hover:border-cyberGreen hover:text-cyberGreen transition-all text-center tracking-wider">
+                    [ 📬 訂閱前哨週報 ]
+                </a>
+            </div>
+        </div>
+        <!-- 裝飾用霓虹光暈 -->
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-cyberBlue/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-cyberGreen/10 rounded-full blur-[120px] pointer-events-none"></div>
+    </header>
+
+    <!-- 🛰️ 2. 創作者檔案 About Me -->
+    <section id="about" class="py-24 px-6 max-w-7xl mx-auto z-10 relative border-t border-gray-900">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+            <!-- 左側：多媒體與情境主圖區 -->
+            <div class="lg:col-span-5 relative group">
+                <div class="absolute -inset-2 bg-gradient-to-r from-cyberBlue to-cyberGreen rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                <div class="relative bg-cyberCard border border-gray-800 rounded-lg overflow-hidden">
+                    <!-- 內嵌極客質感氛圍影音佔位/動態圖 (使用 Unsplash 高質感科技圖) -->
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Cyber-Gen Workspace" class="w-full h-full object-cover aspect-[4/5] opacity-80 group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-cyberBg via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6 text-left">
+                        <p class="font-cyber tracking-widest text-[10px] text-cyberBlue mb-1">// SATELLITE_LINK_ACTIVE</p>
+                        <p class="text-sm font-medium text-white">數位游牧現場：遠端雲端自動化架構部署中</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 右側：發光磨砂玻璃卡片 -->
+            <div class="lg:col-span-7 bg-cyberCard/60 border border-gray-800/80 p-8 md:p-12 rounded-xl backdrop-blur-md">
+                <span class="font-cyber text-cyberGreen tracking-widest text-xs uppercase block mb-2">// IDENTITY CODEX</span>
+                <h2 class="text-3xl md:text-4xl font-cyber font-bold text-white mb-6">嗨，我是 Cyber-Gen</h2>
+                <div class="space-y-6 text-gray-400 leading-relaxed text-base md:text-lg">
+                    <p>
+                        <strong class="text-white">曾任科技獨角獸公司高階產品負責人</strong>，現為全職獨立自媒體創作者。
+                    </p>
+                    <blockquote class="border-l-2 border-cyberBlue pl-4 py-2 italic bg-cyberBlue/5 text-gray-300 font-medium">
+                        「將硬核、複雜的科技底層邏輯，轉譯為每個人都能即學即用的商業思維與實戰工具。」
+                    </blockquote>
+                    <p>
+                        在這個演算法迭代速度超越人類想像的代際轉換期，我不只是內容產出者，幕後更是科技巨變浪潮中的<strong class="text-cyberBlue">跨界編譯者</strong>。我的內容專注於 <strong class="text-white">AI 自動化流派</strong>、<strong class="text-white">商業破局戰術</strong>以及<strong class="text-white">數位游牧的無邊界生活</strong>，致力於協助新一代專業人才在多變的時代中卡位精準的生態位鏈。
+                    </p>
+                </div>
+                
+                <!-- 📊 數據展示區 -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-10 mt-10 border-t border-gray-800 text-center font-cyber">
+                    <div>
+                        <div class="text-2xl md:text-3xl font-black text-white">580K+</div>
+                        <div class="text-xs text-gray-500 tracking-wider mt-1">YT 訂閱人數</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl md:text-3xl font-black text-cyberBlue">210K+</div>
+                        <div class="text-xs text-gray-500 tracking-wider mt-1">IG 追蹤者</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl md:text-3xl font-black text-cyberGreen">15K+</div>
+                        <div class="text-xs text-gray-500 tracking-wider mt-1">電子報付費精英</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl md:text-3xl font-black text-cyberPurple">50M+</div>
+                        <div class="text-xs text-gray-500 tracking-wider mt-1">全網總觀看量</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🏆 3. 焦點爆款內容 Featured Alpha -->
+    <section id="featured" class="py-24 px-6 bg-black/40 border-y border-gray-900 z-10 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div>
+                    <span class="font-cyber text-cyberPurple tracking-widest text-xs uppercase block mb-2">// CORE DEPLOYMENT</span>
+                    <h2 class="text-3xl md:text-4xl font-cyber font-bold text-white">焦點爆款：全網點閱破百萬的封神之作</h2>
+                </div>
+                <!-- 互動過濾篩選器 -->
+                <div class="flex flex-wrap gap-2 font-cyber text-xs">
+                    <button onclick="filterContent('all')" id="btn-all" class="px-4 py-2 border border-cyberBlue bg-cyberBlue text-black font-bold transition-all">[ 全部 / ALL ]</button>
+                    <button onclick="filterContent('ai')" id="btn-ai" class="px-4 py-2 border border-gray-800 text-gray-400 hover:border-gray-600 transition-all">[ AI 趨勢 ]</button>
+                    <button onclick="filterContent('auto')" id="btn-auto" class="px-4 py-2 border border-gray-800 text-gray-400 hover:border-gray-600 transition-all">[ 自動化 ]</button>
+                    <button onclick="filterContent('creator')" id="btn-creator" class="px-4 py-2 border border-gray-800 text-gray-400 hover:border-gray-600 transition-all">[ 創作者經濟 ]</button>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8" id="content-grid">
+                <!-- 卡片 1: AI -->
+                <div class="card-item bg-cyberCard border border-gray-800 p-8 rounded-xl flex flex-col justify-between group hover:border-cyberBlue/50 transition-all duration-300 glitch-hover" data-category="ai">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-cyber px-2.5 py-1 bg-red-950/50 border border-red-500/30 text-red-400 rounded">🔴 深度趨勢 | AI</span>
+                            <i class="fa-solid fa-brain text-gray-600 group-hover:text-cyberBlue transition-colors"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyberBlue transition-colors">2026年被AI全面覆蓋的十種職業？全面重塑職涯防線</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">本期內容深度剖析自動化代際轉換的真實進程。手把手帶你建構無法被演算法取代的稀缺競爭力。我們將解密多模態 AI 對知識型勞動的衝擊，並給出具體的「人機協同」轉型路線圖。</p>
+                    </div>
+                    <div class="flex gap-4 pt-6 font-cyber text-xs border-t border-gray-800/60 mt-6">
+                        <a href="#cta" class="text-cyberBlue hover:underline">閱讀專欄 <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i></a>
+                        <a href="#cta" class="text-gray-500 hover:text-white">觀看影片</a>
+                    </div>
+                </div>
+
+                <!-- 卡片 2: 自動化 -->
+                <div class="card-item bg-cyberCard border border-gray-800 p-8 rounded-xl flex flex-col justify-between group hover:border-cyberGreen/50 transition-all duration-300 glitch-hover" data-category="auto">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-cyber px-2.5 py-1 bg-emerald-950/50 border border-cyberGreen/30 text-cyberGreen rounded">🟢 高效生產力 | 自動化</span>
+                            <i class="fa-solid fa-gears text-gray-600 group-hover:text-cyberGreen transition-colors"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyberGreen transition-colors">一人公司實戰：我是如何靠 AI 自動化工具省下 80% 時間？</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">完全公開我的數位自動化工作流（Workflow）。涵蓋多渠道內容自動分發、智能排程與 AI 腳本矩陣。從選題抓取到自動剪輯框架，教你如何用一人的肉身，活成一支高產出的軍隊。</p>
+                    </div>
+                    <div class="flex gap-4 pt-6 font-cyber text-xs border-t border-gray-800/60 mt-6">
+                        <a href="#cta" class="text-cyberGreen hover:underline">複製工作流原始碼 <i class="fa-solid fa-code ml-1 text-[10px]"></i></a>
+                        <a href="#cta" class="text-gray-500 hover:text-white">觀看教學</a>
+                    </div>
+                </div>
+
+                <!-- 卡片 3: 創作者經濟 -->
+                <div class="card-item bg-cyberCard border border-gray-800 p-8 rounded-xl flex flex-col justify-between group hover:border-cyberPurple/50 transition-all duration-300 glitch-hover" data-category="creator">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-cyber px-2.5 py-1 bg-purple-950/50 border border-cyberPurple/30 text-cyberPurple rounded">🔵 商業賽道 | 創作者經濟</span>
+                            <i class="fa-solid fa-chart-network text-gray-600 group-hover:text-cyberPurple transition-colors"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyberPurple transition-colors">解構下一個萬億級市場：去中心化創作者經濟底層邏輯</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">深入探討如何透過粉絲所有權以及數位資產結構，打造可持續、高利潤的複利變現閉環。跳脫傳統平台廣告分潤的剝削，建立專屬你品牌的去中心化數字生態。</p>
+                    </div>
+                    <div class="flex gap-4 pt-6 font-cyber text-xs border-t border-gray-800/60 mt-6">
+                        <a href="#cta" class="text-cyberPurple hover:underline">下載白皮書 <i class="fa-solid fa-download ml-1 text-[10px]"></i></a>
+                        <a href="#cta" class="text-gray-500 hover:text-white">線上收聽</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 進階工具推薦清單區塊 -->
+            <div class="mt-16 bg-cyberCard border border-gray-800 p-8 rounded-xl">
+                <h3 class="font-cyber font-bold text-lg text-white mb-6 flex items-center">
+                    <i class="fa-solid fa-toolbox text-cyberGreen mr-3"></i> 推薦自動化工具棧 (Recommended Tech Stack)
+                </h3>
+                <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                    <div class="p-4 bg-black/40 border border-gray-800 rounded hover:border-cyberBlue transition-all">
+                        <div class="font-bold text-white">Make (Integromat)</div>
+                        <div class="text-xs text-gray-500 mt-1">複雜多階工作流與數據串接樞紐。</div>
+                    </div>
+                    <div class="p-4 bg-black/40 border border-gray-800 rounded hover:border-cyberGreen transition-all">
+                        <div class="font-bold text-white">Zapier</div>
+                        <div class="text-xs text-gray-500 mt-1">生態最齊全的即時無程式碼自動化。</div>
+                    </div>
+                    <div class="p-4 bg-black/40 border border-gray-800 rounded hover:border-cyberPurple transition-all">
+                        <div class="font-bold text-white">LangChain</div>
+                        <div class="text-xs text-gray-500 mt-1">開發自定義 AI Agent 的底層大語言模型框架。</div>
+                    </div>
+                    <div class="p-4 bg-black/40 border border-gray-800 rounded hover:border-cyberBlue transition-all">
+                        <div class="font-bold text-white">n8n</div>
+                        <div class="text-xs text-gray-500 mt-1">適合獨立駭客自託管的開源自動化節點。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🎛️ 4. 矩陣社群傳送門 Ecosystem Hub -->
+    <section id="ecosystem" class="py-24 px-6 max-w-7xl mx-auto z-10 relative">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="font-cyber text-cyberBlue tracking-widest text-xs uppercase block mb-2">// MATRIX TIMELINE</span>
+            <h2 class="text-3xl md:text-4xl font-cyber font-bold text-white">矩陣社群：24小時全時段訊息補給節點</h2>
+        </div>
+
+        <!-- 網格排版：左側時間軸，右側卡片說明 -->
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+            <!-- 動態時間軸 (左側) -->
+            <div class="lg:col-span-7 bg-cyberCard border border-gray-800 rounded-xl p-6 md:p-8 space-y-8 relative">
+                <div class="absolute left-9 top-10 bottom-10 w-0.5 bg-gradient-to-b from-cyberBlue via-cyberPurple to-cyberGreen"></div>
+                
+                <!-- 節點 1 -->
+                <div class="flex items-start space-x-6 relative">
+                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-cyberBg border-2 border-cyberBlue flex items-center justify-center z-10 shadow-neonBlue">
+                        <div class="w-2 h-2 rounded-full bg-cyberBlue"></div>
+                    </div>
+                    <div>
+                        <span class="font-cyber text-xs font-bold text-cyberBlue tracking-wider block">WEEKLY / FLAGSHIP</span>
+                        <h4 class="text-lg font-bold text-white mt-1">YouTube 旗艦頻道</h4>
+                        <p class="text-gray-400 text-sm mt-1">每週精耕硬核深度長影片。專注於長篇戰略、工具評測與深度訪談。</p>
+                        <!-- 內嵌多媒體播放器模擬區架構 -->
+                        <div class="mt-3 bg-black/50 border border-gray-800 rounded p-3 flex items-center justify-between text-xs">
+                            <span class="text-gray-500"><i class="fa-brands fa-youtube text-red-500 mr-2"></i> 最新影片串流就緒</span>
+                            <a href="#cta" class="text-cyberBlue hover:underline">立即前往播放</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 節點 2 -->
+                <div class="flex items-start space-x-6 relative">
+                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-cyberBg border-2 border-cyberPurple flex items-center justify-center z-10 shadow-neonPurple">
+                        <div class="w-2 h-2 rounded-full bg-cyberPurple"></div>
+                    </div>
+                    <div>
+                        <span class="font-cyber text-xs font-bold text-cyberPurple tracking-wider block">DAILY / SHARDS</span>
+                        <h4 class="text-lg font-bold text-white mt-1">Instagram 科技卡片</h4>
+                        <p class="text-gray-400 text-sm mt-1">科技精華圖卡與生活日常。將複雜的開源專案、科技新聞提煉為 10 張圖卡，即刷即得。</p>
+                    </div>
+                </div>
+
+                <!-- 節點 3 -->
+                <div class="flex items-start space-x-6 relative">
+                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-cyberBg border-2 border-cyberGreen flex items-center justify-center z-10 shadow-neonGreen">
+                        <div class="w-2 h-2 rounded-full bg-cyberGreen"></div>
+                    </div>
+                    <div>
+                        <span class="font-cyber text-xs font-bold text-cyberGreen tracking-wider block">REALTIME / FAST</span>
+                        <h4 class="text-lg font-bold text-white mt-1">Shorts / TikTok 短影音</h4>
+                        <p class="text-gray-400 text-sm mt-1">60秒高資訊密度高能短片。高燃快節奏，直擊最新科技現場與工具發佈。</p>
+                    </div>
+                </div>
+
+                <!-- 節點 4 -->
+                <div class="flex items-start space-x-6 relative">
+                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-cyberBg border-2 border-gray-600 flex items-center justify-center z-10">
+                        <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+                    </div>
+                    <div>
+                        <span class="font-cyber text-xs font-bold text-gray-500 tracking-wider block">COMMUTE / AUDIO</span>
+                        <h4 class="text-lg font-bold text-white mt-1">Tech Podcast 播客頻道</h4>
+                        <p class="text-gray-400 text-sm mt-1">解救通勤碎片時間的隨身聽。深度對談數位游牧者與科技圈內大佬，拓寬你的商業認知邊界。</p>
+                        <!-- Podcast 播放器模擬 -->
+                        <div class="mt-3 bg-black/50 border border-gray-800 rounded p-3 flex items-center gap-3 text-xs">
+                            <button class="w-6 h-6 rounded-full bg-cyberPurple text-white flex items-center justify-center shadow-neonPurple"><i class="fa-solid fa-play text-[10px] ml-0.5"></i></button>
+                            <span class="text-gray-400 truncate">EP.42 如何在2026依靠自動化資產實現地理自由？</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右側引導區 -->
+            <div class="lg:col-span-5 space-y-6">
+                <div class="border border-gray-800 bg-cyberCard/40 p-8 rounded-xl space-y-4">
+                    <i class="fa-solid fa-circle-nodes text-3xl text-cyberBlue"></i>
+                    <h3 class="text-xl font-bold font-cyber text-white">全方位矩陣連動</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        我的訊息節點遍佈全網，不論你是深度思考的長文章愛好者，還是偏好碎片化吸收的極客，皆能在此找到最適合你的共振波段。
+                    </p>
+                </div>
+                <div class="border border-cyberGreen/20 bg-cyberGreen/5 p-6 rounded-xl flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-cyber text-cyberGreen tracking-widest">NETWORK STATUS</p>
+                        <p class="text-white text-sm font-bold mt-1">所有通訊節點運作正常</p>
+                    </div>
+                    <div class="w-3 h-3 rounded-full bg-cyberGreen animate-ping"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🚀 5. 行動呼籲 Call To Action -->
+    <section id="cta" class="py-24 px-6 max-w-7xl mx-auto z-10 relative border-t border-gray-900">
+        <div class="grid md:grid-cols-2 gap-8">
+            
+            <!-- 左欄：電子報訂閱 (內含安全與加密驗證提示模擬) -->
+            <div class="bg-cyberCard border border-gray-800 p-8 md:p-10 rounded-xl relative overflow-hidden group shadow-neonBlue/5 hover:border-cyberBlue/40 transition-all">
+                <div class="relative z-10 space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-envelope-open-text text-2xl text-cyberBlue"></i>
+                        <h3 class="text-xl md:text-2xl font-cyber font-bold text-white">免費加入「科技前哨站」週報</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        每週五準時為您提煉 <span class="text-white font-semibold">3 則全球前沿科技趨勢</span>、<span class="text-white font-semibold">2 個極致生產力工具評測</span>。目前已有 65,000+ 位先行者共同訂閱，這是你與未來世界保持同步的最低成本投資。
+                    </p>
+                    <form id="newsletter-form" class="space-y-3 pt-2" onsubmit="handleSubscribe(event)">
+                        <input type="email" id="email-input" required placeholder="輸入您的 Email 地址..." class="w-full bg-cyberBg border border-gray-800 focus:border-cyberBlue focus:outline-none px-4 py-3 text-sm text-white placeholder-gray-600 transition-colors rounded">
+                        <button type="submit" class="w-full bg-cyberBlue text-black font-cyber font-bold py-3 text-sm tracking-widest hover:brightness-110 transition-all rounded shadow-neonBlue">
+                            立即訂閱 / JOIN US ➔
+                        </button>
+                    </form>
+                    <div class="text-[10px] text-gray-600 font-cyber flex items-center gap-1.5">
+                        <i class="fa-solid fa-shield-halved text-cyberBlue"></i> SSL SECURE SUBSCRIPTION • 隨時可取消訂閱
+                    </div>
+                </div>
+                <!-- 卡片底層微弱光暈 -->
+                <div class="absolute -bottom-20 -right-20 w-48 h-48 bg-cyberBlue/10 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+
+            <!-- 右欄：支持贊助 -->
+            <div class="bg-cyberCard border border-gray-800 p-8 md:p-10 rounded-xl relative overflow-hidden group shadow-neonGreen/5 hover:border-cyberGreen/40 transition-all">
+                <div class="relative z-10 h-full flex flex-col justify-between space-y-6">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-cup-togo text-2xl text-cyberGreen"></i>
+                            <h3 class="text-xl md:text-2xl font-cyber font-bold text-white">能量補給站</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            歡迎請我喝杯黑咖啡，支持自媒體持續輸出超高畫質乾貨！您的每一杯咖啡，都是驅動 Cyber-Gen 團隊解碼下一個科技世代的燃料。
+                        </p>
+                    </div>
+                    <div class="pt-6 space-y-4">
+                        <button onclick="handleSupport()" class="w-full border border-cyberGreen text-cyberGreen font-cyber font-bold py-3 text-sm tracking-widest hover:bg-cyberGreen hover:text-black transition-all shadow-neonGreen rounded">
+                            充電支持 / BUY ME A COFFEE
+                        </button>
+                        <div class="text-[10px] text-gray-600 font-cyber text-center">
+                            SECURE PAYMENT PROCESSING VIA STRIPE / PAYPAL
+                        </div>
+                    </div>
+                </div>
+                <!-- 卡片底層微弱光暈 -->
+                <div class="absolute -bottom-20 -right-20 w-48 h-48 bg-cyberGreen/10 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 🌐 頁尾 -->
+    <footer class="py-12 border-t border-gray-900 text-center font-cyber text-xs text-gray-600 px-6 z-10 relative">
+        <p class="tracking-widest">&copy; 2026 CYBER-GEN. All Rights Reserved. Powered by Next-Gen AI.</p>
+    </footer>
+
+    <!-- JavaScript 交互邏輯群 -->
+    <script>
+        // 焦點爆款過濾功能
+        function filterContent(category) {
+            const items = document.querySelectorAll('.card-item');
+            const buttons = {
+                all: document.getElementById('btn-all'),
+                ai: document.getElementById('btn-ai'),
+                auto: document.getElementById('btn-auto'),
+                creator: document.getElementById('btn-creator')
+            };
+            
+            // 重置所有按鈕樣式
+            Object.keys(buttons).forEach(key => {
+                if (buttons[key]) {
+                    buttons[key].className = "px-4 py-2 border border-gray-800 text-gray-400 hover:border-gray-600 transition-all";
+                }
+            });
+            
+            // 啟用當前點擊按鈕的極客發光樣式
+            if (category === 'all') {
+                buttons.all.className = "px-4 py-2 border border-cyberBlue bg-cyberBlue text-black font-bold transition-all shadow-neonBlue";
+            } else if (category === 'ai') {
+                buttons.ai.className = "px-4 py-2 border border-red-500 bg-red-500 text-white font-bold transition-all";
+            } else if (category === 'auto') {
+                buttons.auto.className = "px-4 py-2 border border-cyberGreen bg-cyberGreen text-black font-bold transition-all shadow-neonGreen";
+            } else if (category === 'creator') {
+                buttons.creator.className = "px-4 py-2 border border-cyberPurple bg-cyberPurple text-white font-bold transition-all shadow-neonPurple";
+            }
+
+            // 執行卡片顯隱過濾
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // 訂閱事件處理
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const email = document.getElementById('email-input').value;
+            alert(`【系統連線成功】\n已將加密確認信發送至：${email}\n歡迎加入科技前哨站！`);
+            document.getElementById('email-input').value = '';
+        }
+
+        // 贊助支持事件處理
+        function handleSupport() {
+            alert('【補給站系統核心接收】\n感謝您的慷慨充電！能量燃料已全數注入 Cyber-Gen 核心引擎。');
+        }
+    </script>
+</body>
+</html>

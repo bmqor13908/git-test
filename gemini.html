@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER-GEN | 未來科技自媒體旗艦基地</title>
+    <!-- 引入 Remix Icon 現代化圖標庫 -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        /* --- 核心視覺變數 --- */
+        :root {
+            --bg-color: #030307;
+            --card-bg: rgba(12, 12, 26, 0.65);
+            --primary: #00f0ff;
+            --secondary: #ff007f;
+            --accent: #7000ff;
+            --text-main: #ffffff;
+            --text-muted: #8fa0dd;
+            --glow-primary: 0 0 25px rgba(0, 240, 255, 0.45);
+            --glow-secondary: 0 0 25px rgba(255, 0, 127, 0.45);
+        }
+
+        /* --- 全域樣式重設與流暢滾動 --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'PingFang TC', 'Microsoft JhengHei', -apple-system, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 25%, rgba(112, 0, 255, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(255, 0, 127, 0.18) 0%, transparent 45%);
+            background-attachment: fixed;
+        }
+
+        /* 高質感滾動條 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb {
+            background: #1a1a30;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- 1. 磨砂玻璃導覽列 --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(3, 3, 7, 0.75);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+        header.scrolled {
+            padding: 5px 0;
+            background: rgba(3, 3, 7, 0.92);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 0;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        /* --- 2. 英雄主視覺區塊 --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding-top: 80px;
+        }
+        .hero-content { z-index: 10; max-width: 850px; }
+        .badge {
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            color: var(--primary);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 28px;
+            animation: pulseGlow 2.5s infinite;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(0, 240, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
+        }
+        .hero h1 { font-size: 68px; font-weight: 900; line-height: 1.15; margin-bottom: 28px; }
+        .hero h1 span {
+            background: linear-gradient(45deg, var(--primary) 20%, var(--secondary) 60%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-top: 8px;
+        }
+        .hero p { font-size: 19px; color: var(--text-muted); margin-bottom: 45px; line-height: 1.7; }
+        .cta-group { display: flex; gap: 20px; justify-content: center; }
+        .btn {
+            padding: 15px 36px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-primary { background: linear-gradient(45deg, var(--primary), var(--accent)); color: #030307; box-shadow: var(--glow-primary); border: none; }
+        .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 0 35px rgba(0, 240, 255, 0.75); }
+        .btn-secondary { background: transparent; color: var(--text-main); border: 1px solid rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); }
+        .btn-secondary:hover { border-color: var(--secondary); color: var(--secondary); box-shadow: var(--glow-secondary); transform: translateY(-4px); }
+
+        /* --- 3. 通用非同步滾動區塊樣式 --- */
+        section {
+            padding: 120px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+        section.visible { opacity: 1; transform: translateY(0); }
+        .section-title { text-align: center; margin-bottom: 70px; }
+        .section-title h2 { font-size: 38px; font-weight: 800; margin-bottom: 18px; position: relative; display: inline-block; }
+        .section-title h2::after {
+            content: ''; width: 60%; height: 3px; background: linear-gradient(90deg, var(--secondary), transparent);
+            position: absolute; bottom: -8px; left: 20%;
+        }
+        .section-title p { color: var(--text-muted); font-size: 16px; }
+
+        /* --- 4. 關於我與擬態數據卡片 --- */
+        .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 70px; align-items: center; }
+        .about-text h3 { font-size: 30px; margin-bottom: 24px; color: var(--primary); }
+        .about-text p { color: var(--text-muted); line-height: 1.85; margin-bottom: 22px; font-size: 16px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .stat-card {
+            background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 35px 25px; border-radius: 16px; text-align: center; backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); transition: all 0.4s ease;
+        }
+        .stat-card:hover { border-color: rgba(0, 240, 255, 0.5); transform: translateY(-6px); box-shadow: var(--glow-primary); }
+        .stat-num { font-size: 44px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(45deg, #ffffff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-label { color: var(--text-muted); font-size: 14px; letter-spacing: 1px; }
+
+        /* --- 5. 爆款影音作品牆區塊 --- */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 35px; }
+        .portfolio-card {
+            background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: all 0.4s ease;
+        }
+        .portfolio-card:hover { transform: scale(1.025); border-color: rgba(255, 0, 127, 0.5); box-shadow: 0 15px 35px rgba(255, 0, 127, 0.15); }
+        .thumb-wrapper { position: relative; padding-top: 56.25%; background: #090914; overflow: hidden; }
+        .thumb-wrapper img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .portfolio-card:hover .thumb-wrapper img { transform: scale(1.08) rotate(0.5deg); }
+        .video-play-btn {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 64px; height: 64px; background: rgba(255, 0, 127, 0.85); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-size: 26px;
+            box-shadow: var(--glow-secondary); transition: all 0.3s ease; z-index: 2;
+        }
+        .portfolio-card:hover .video-play-btn { background: var(--primary); box-shadow: var(--glow-primary); color: #030307; transform: translate(-50%, -50%) scale(1.1); }
+        .card-content { padding: 28px; }
+        .card-tag { color: var(--secondary); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; display: inline-block; }
+        .card-content h3 { font-size: 21px; margin-bottom: 14px; line-height: 1.45; transition: color 0.3s ease; }
+        .portfolio-card:hover .card-content h3 { color: var(--primary); }
+        .card-content p { color: var(--text-muted); font-size: 14.5px; line-height: 1.65; }
+
+        /* --- 6. 多渠道矩陣傳送門 --- */
+        .social-channels { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; }
+        .social-btn {
+            display: flex; flex-direction: column; align-items: center; padding: 45px 24px;
+            background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 20px; text-decoration: none; color: var(--text-main); transition: all 0.4s ease;
+        }
+        .social-btn i { font-size: 44px; margin-bottom: 18px; transition: transform 0.4s ease; }
+        .social-btn span { font-weight: 700; font-size: 17px; }
+        .social-btn small { color: var(--text-muted); margin-top: 6px; font-size: 12.5px; text-align: center; }
+        .social-btn.youtube:hover { background: rgba(255, 0, 0, 0.08); border-color: #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.25); }
+        .social-btn.instagram:hover { background: rgba(225, 48, 108, 0.08); border-color: #e1306c; box-shadow: 0 0 25px rgba(225, 48, 108, 0.25); }
+        .social-btn.tiktok:hover { background: rgba(255, 255, 255, 0.05); border-color: var(--primary); box-shadow: var(--glow-primary); }
+        .social-btn.podcast:hover { background: rgba(143, 0, 255, 0.08); border-color: #8f00ff; box-shadow: 0 0 25px rgba(143, 0, 255, 0.25); }
+        .social-btn:hover i { transform: scale(1.15) translateY(-4px); }
+
+        /* --- 7. 電子報與多維變現區塊 --- */
+        .monetize-box {
+            background: linear-gradient(135deg, rgba(14, 14, 30, 0.85) 0%, rgba(6, 6, 14, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 28px; padding: 65px;
+            display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 65px; align-items: center;
+            position: relative; overflow: hidden; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        }
+        .monetize-box::before {
+            content: ''; position: absolute; top: -40%; right: -30%; width: 350px; height: 350px;
+            background: var(--accent); filter: blur(140px); opacity: 0.25; pointer-events: none;
+        }
+        .newsletter-side h3 { font-size: 34px; margin-bottom: 16px; font-weight: 800; }
+        .newsletter-side p { color: var(--text-muted); margin-bottom: 32px; line-height: 1.7; font-size: 15.5px; }
+        .newsletter-form { display: flex; gap: 16px; }
+        .newsletter-form input {
+            flex: 1; padding: 18px 24px; border-radius: 10px; background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.08); color: #ffffff; font-size: 16px; outline: none;
+        }
+        .newsletter-form input:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 240, 255, 0.15); }
+        .sponsor-side {
+            background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 45px 35px; border-radius: 20px; text-align: center; position: relative; z-index: 2;
+        }
+        .sponsor-side i { font-size: 52px; color: var(--secondary); margin-bottom: 18px; display: inline-block; }
+        .sponsor-side h4 { font-size: 22px; margin-bottom: 12px; }
+
+        /* --- 8. 頁尾 --- */
+        footer { border-top: 1px solid rgba(255, 255, 255, 0.03); padding: 50px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
+        footer p { margin-bottom: 12px; }
+
+        /* --- 9. RWD 響應式斷點 --- */
+        @media (max-width: 992px) {
+            .about-grid, .monetize-box { grid-template-columns: 1fr; gap: 50px; }
+            .hero h1 { font-size: 52px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 40px; }
+            .newsletter-form { flex-direction: column; }
+            .monetize-box { padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 導覽列 -->
+    <header id="header">
+        <div class="container nav-container">
+            <div class="logo">Cyber-Gen</div>
+            <ul class="nav-links">
+                <li><a href="#hero" class="active">首頁</a></li>
+                <li><a href="#about">創作者檔案</a></li>
+                <li><a href="#portfolio">熱門爆款</a></li>
+                <li><a href="#social">跨平台矩陣</a></li>
+                <li><a href="#subscribe">極客情報</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 英雄主視覺區 -->
+    <section id="hero" class="hero visible">
+        <div class="container hero-content">
+            <div class="badge">🔥 2026 NEXT-GEN MEDIA</div>
+            <h1>用解碼前沿科技的視角<br><span>重塑未來的商業想像</span></h1>
+            <p>我是 Cyber-Gen。在這裡，我透過深度影音與核心專欄，拆解 AI 演進趨勢、科技戰略與數位游牧的高效流派。每週陪伴全球超過 50 萬名先行者破局成長。</p>
+            <div class="cta-group">
+                <a href="#portfolio" class="btn btn-primary">解碼熱門影片 <i class="ri-play-circle-line"></i></a>
+                <a href="#subscribe" class="btn btn-secondary">訂閱前哨週報</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 關於我 / 擬態數據區 -->
+    <section id="about" class="container">
+        <div class="section-title">
+            <h2>關於創作者</h2>
+            <p>不只是內容產出者，幕後更是科技巨變浪潮中的跨界編譯者</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <h3>嗨，我是 Cyber-Gen</h3>
+                <p>曾任科技獨角獸公司高階產品負責人，現為全職獨立自媒體創作者。核心宗旨在於「將硬核、複雜的科技底層邏輯，轉譯為每個人都能即學即用的商業思維與實戰工具」。</p>
+                <p>我的內容專注於 AI 自動化流派、商業破局戰術以及數位游牧的無邊界生活，致力於協助新一代專業人才在多變的時代中卡位精準生態位鏈。</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-num" data-target="380">0</div>
+                    <div class="stat-label">YouTube 訂閱人數 (K)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num" data-target="150">0</div>
+                    <div class="stat-label">Instagram 追蹤者 (K)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num" data-target="65">0</div>
+                    <div class="stat-label">電子報付費讀者 (K)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num" data-target="1800">0</div>
+                    <div class="stat-label">矩陣總觀看量 (萬+)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 焦點爆款作品牆 -->
+    <section id="portfolio" class="container">
+        <div class="section-title">
+            <h2>焦點爆款內容</h2>
+            <p>全網點閱破百萬的精選封神之作，點擊即刻啟動視界</p>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <div class="thumb-wrapper">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="AI">
+                    <div class="video-play-btn"><i class="ri-play-fill"></i></div>
+                </div>
+                <div class="card-content">
+                    <span class="card-tag">深度趨勢</span>
+                    <h3>2026年被AI全面覆蓋的十種職業？全面重塑職涯防線</h3>
+                    <p>本期內容深度剖析自動化代際轉換的真實進程，並手把手帶你建構無法被演算法取代的稀缺競爭力。</p>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <div class="thumb-wrapper">
+                    <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=600&q=80" alt="自動化">
+                    <div class="video-play-btn"><i class="ri-play-fill"></i></div>
+                </div>
+                <div class="card-content">
+                    <span class="card-tag">高效生產力</span>
+                    <h3>一人公司實戰：我是如何靠 AI 自動化工具省下 80% 時間？</h3>
+                    <p>完全公開我的數位自動化工作流（Workflow），涵蓋多渠道分發、智能排程與腳本矩陣。</p>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <div class="thumb-wrapper">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="創作者經濟">
+                    <div class="video-play-btn"><i class="ri-play-fill"></i></div>
+                </div>
+                <div class="card-content">
+                    <span class="card-tag">商業賽道</span>
+                    <h3>解構下一個萬億級市場：去中心化創作者經濟底層邏輯</h3>
+                    <p>深入探討如何透過粉絲所有權以及數位資產結構，打造可持續、高利潤的複利變現闭環。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 跨平台媒體矩陣 -->
+    <section id="social" class="container">
+        <div class="section-title">
+            <h2>矩陣社群傳送門</h2>
+            <p>同步鎖定不同媒介節點，捕獲每日第一手科技高能動態</p>
+        </div>
+        <div class="social-channels">
+            <a href="#" class="social-btn youtube">
+                <i class="ri-youtube-fill" style="color:#ff0000;"></i>
+                <span>YouTube 旗艦頻道</span>
+                <small>每週精耕硬核深度長影片</small>
+            </a>
+            <a href="#" class="social-btn instagram">
+                <i class="ri-instagram-line" style="color:#e1306c;"></i>
+                <span>Instagram</span>
+                <small>科技精華圖卡與生活日常</small>
+            </a>
+            <a href="#" class="social-btn tiktok">
+                <i class="ri-tiktok-fill" style="color:#fff;"></i>
+                <span>Shorts / TikTok</span>
+                <small>60秒高資訊密度高能短片</small>
+            </a>
+            <a href="#" class="social-btn podcast">
+                <i class="ri-mic-2-fill" style="color:#8f00ff;"></i>
+                <span>Tech Podcast</span>
+                <small>解救通勤碎片時間的隨身聽</small>
+            </a>
+        </div>
+    </section>
+
+    <!-- 變現與情報電子報 -->
+    <section id="subscribe" class="container">
+        <div class="monetize-box">
+            <div class="newsletter-side">
+                <h3>免費加入「科技前哨站」週報</h3>
+                <p>每週五準時為您提煉 3 則全球前沿科技趨勢、2 個極致生產力工具評測。目前已有 65,000+ 位先行者共同訂閱。</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('歡迎加入前哨站！');">
+                    <input type="email" placeholder="輸入您的 Email 網址" required>
+                    <button type="submit" class="btn btn-primary">立即訂閱 <i class="ri-arrow-right-line"></i></button>
+                </form>
+            </div>
+            <div class="sponsor-side">
+                <i class="ri-cup-line"></i>
+                <h4>能量補給站</h4>
+                <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px; line-height:1.65;">歡迎請我喝杯黑咖啡，支持自媒體持續輸出超高畫質乾貨！</p>
+                <a href="#" class="btn btn-secondary" style="justify-content:center;">充電支持 <i class="ri-heart-fill" style="color:var(--secondary);"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 CYBER-GEN. All Rights Reserved. Powered by Next-Gen AI.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 核心交互驅動 -->
+    <script>
+        // 1. 導覽列滾動響應 + 滾動漸顯動畫
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 40) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
+            
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => {
+                const top = window.scrollY;
+                const offset = sec.offsetTop - 380;
+                const height = sec.offsetHeight;
+                
+                if (top >= offset && top < offset + height) {
+                    sec.classList.add('visible');
+                    const id = sec.getAttribute('id');
+                    document.querySelectorAll('.nav-links a').forEach(a => {
+                        a.classList.remove('active');
+                        if (a.getAttribute('href') === `#${id}`) { a.classList.add('active'); }
+                    });
+                }
+            });
+        });
+
+        // 2. 數字遞增特效
+        const statsSection = document.getElementById('about');
+        let hasCounted = false;
+
+        function triggerCounters() {
+            const counters = document.querySelectorAll('.stat-num');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'), 10);
+                const step = target / 40;
+                const runCounter = () => {
+                    const current = parseInt(counter.innerText, 10);
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current + step);
+                        setTimeout(runCounter, 25);
+                    } else { counter.innerText = target; }
+                };
+                runCounter();
+            });
+        }
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasCounted) {
+                    triggerCounters();
+                    hasCounted = true;
+                }
+            });
+        }, { threshold: 0.25 });
+
+        scrollObserver.observe(statsSection);
+    </script>
+</body>
+</html>

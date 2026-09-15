@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RØUTE 09｜機車改裝、騎士文化與城市移動實驗室">
+<title>RØUTE 09 — 讓車更像你</title>
+
+<style>
+/* =========================================================
+   CSS: GLOBAL-START
+========================================================= */
+:root{
+    --bg:#070809;
+    --panel:#101215;
+    --panel-2:#15181c;
+    --line:rgba(255,255,255,.10);
+    --line-strong:rgba(255,255,255,.18);
+    --text:#f1f0eb;
+    --muted:#858a8e;
+    --acid:#d8ff3e;
+    --orange:#ff5c2f;
+    --max:1380px;
+    --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
+    overflow-x:hidden;
+    line-height:1.7;
+}
+body::selection{background:var(--acid);color:#050505}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+button{cursor:pointer}
+img{display:block;max-width:100%}
+.container{width:min(calc(100% - 48px),var(--max));margin:auto}
+.section{padding:150px 0;position:relative}
+.kicker{
+    display:flex;align-items:center;gap:10px;
+    color:var(--acid);font-size:11px;font-weight:900;
+    letter-spacing:.22em;text-transform:uppercase;
+}
+.kicker::before{content:"";width:28px;height:1px;background:var(--acid)}
+.title{
+    font-size:clamp(48px,7vw,104px);
+    line-height:.94;letter-spacing:-.055em;font-weight:900;
+}
+.muted{color:var(--muted)}
+/* =========================================================
+   CSS: GLOBAL-END
+========================================================= */
+
+/* =========================================================
+   CSS: NOISE-START
+========================================================= */
+.noise{
+    position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.grid-bg{
+    position:fixed;inset:0;pointer-events:none;z-index:-3;opacity:.17;
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:72px 72px;
+    mask-image:linear-gradient(to bottom,black,transparent 88%);
+}
+.cursor-light{
+    position:fixed;width:320px;height:320px;border-radius:50%;pointer-events:none;z-index:-1;
+    background:radial-gradient(circle,rgba(216,255,62,.07),transparent 65%);
+    transform:translate(-50%,-50%);
+}
+/* =========================================================
+   CSS: NOISE-END
+========================================================= */
+
+/* =========================================================
+   CSS: INTRO-START
+========================================================= */
+.intro{
+    position:fixed;inset:0;z-index:5000;background:#050606;
+    display:grid;place-items:center;overflow:hidden;
+    transition:opacity 1s var(--ease),visibility 1s;
+}
+.intro.done{opacity:0;visibility:hidden}
+.intro-inner{width:min(900px,calc(100% - 40px))}
+.intro-code{font:11px/1.8 monospace;color:#62686a;margin-bottom:28px}
+.intro-word{font-size:clamp(60px,13vw,180px);font-weight:900;letter-spacing:-.08em;line-height:.8}
+.intro-word span{color:var(--acid)}
+.intro-bar{height:2px;background:#1c2022;margin-top:40px;overflow:hidden}
+.intro-progress{height:100%;width:0;background:var(--acid);transition:width 1.7s var(--ease)}
+.intro-status{margin-top:14px;display:flex;justify-content:space-between;color:#62686a;font:10px monospace}
+/* =========================================================
+   CSS: INTRO-END
+========================================================= */
+
+/* =========================================================
+   CSS: HEADER-START
+========================================================= */
+.header{
+    position:fixed;left:0;right:0;top:0;z-index:1000;
+    border-bottom:1px solid transparent;transition:.35s var(--ease);
+}
+.header.scrolled{background:rgba(7,8,9,.78);backdrop-filter:blur(18px);border-color:var(--line)}
+.header-inner{height:82px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:900;letter-spacing:.13em}
+.logo-mark{
+    width:34px;height:34px;display:grid;place-items:center;
+    border:1px solid var(--line-strong);transform:rotate(45deg);
+    background:var(--acid);color:#070809;font-size:10px;
+}
+.logo-mark span{transform:rotate(-45deg)}
+.nav{display:flex;gap:32px}
+.nav a{font-size:11px;color:#a7abad;font-weight:800;position:relative}
+.nav a::after{content:"";position:absolute;left:0;bottom:-8px;width:0;height:1px;background:var(--acid);transition:.25s}
+.nav a:hover{color:#fff}.nav a:hover::after{width:100%}
+.header-right{display:flex;align-items:center;gap:10px}
+.header-index{font:10px monospace;color:#676c6f}
+.menu-btn{display:none;width:40px;height:40px;border:1px solid var(--line);background:none;color:#fff}
+/* =========================================================
+   CSS: HEADER-END
+========================================================= */
+
+/* =========================================================
+   CSS: HERO-START
+========================================================= */
+.hero{min-height:1100px;display:flex;align-items:center;overflow:hidden;padding-top:100px}
+.hero-copy{position:relative;z-index:5;width:52%}
+.hero-kicker{margin-bottom:28px}
+.hero-title{font-size:clamp(72px,11vw,168px);line-height:.79;letter-spacing:-.08em;font-weight:900}
+.hero-title .outline{color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.38)}
+.hero-title .acid{color:var(--acid)}
+.hero-sub{max-width:550px;margin-top:42px;color:#a3a8aa;font-size:15px}
+.hero-cta{display:flex;gap:12px;margin-top:35px;flex-wrap:wrap}
+.btn{
+    min-height:52px;padding:0 22px;border:1px solid var(--line-strong);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:900;letter-spacing:.12em;transition:.3s var(--ease);
+    background:rgba(255,255,255,.025)
+}
+.btn:hover{transform:translateY(-4px);border-color:#fff}
+.btn.primary{background:var(--acid);color:#070809;border-color:var(--acid)}
+.btn.primary:hover{box-shadow:0 12px 40px rgba(216,255,62,.18)}
+.hero-visual{position:absolute;right:-4%;top:48%;width:68vw;max-width:1050px;transform:translateY(-50%);z-index:1}
+.machine{position:relative;aspect-ratio:1.2}
+.machine-glow{position:absolute;width:60%;aspect-ratio:1;right:10%;top:10%;border-radius:50%;background:radial-gradient(circle,rgba(216,255,62,.11),transparent 65%);filter:blur(10px)}
+.ring{position:absolute;border:1px solid rgba(255,255,255,.08);border-radius:50%;width:75%;aspect-ratio:1;right:2%;top:4%;transform:rotate(18deg)}
+.ring::before{content:"";position:absolute;width:8px;height:8px;background:var(--acid);border-radius:50%;right:12%;top:10%;box-shadow:0 0 24px var(--acid)}
+.bike-svg{position:absolute;inset:8% 0 0 0;width:100%;height:84%;overflow:visible;filter:drop-shadow(0 40px 35px rgba(0,0,0,.75))}
+.hero-readout{
+    position:absolute;right:4%;bottom:12%;width:260px;padding:17px;
+    border:1px solid var(--line);background:rgba(7,8,9,.74);backdrop-filter:blur(12px);
+    font:10px monospace;color:#81878a
+}
+.readout-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.readout-row:last-child{border:0}.readout-row b{color:var(--acid)}
+.hero-bottom{position:absolute;left:24px;right:24px;bottom:30px;display:flex;justify-content:space-between;align-items:end;z-index:5}
+.hero-scroll{font:10px monospace;color:#666;writing-mode:vertical-rl;letter-spacing:.18em}
+.hero-stats{display:flex;gap:38px}
+.stat strong{display:block;font-size:22px}.stat span{font:9px monospace;color:#676c6f}
+/* =========================================================
+   CSS: HERO-END
+========================================================= */
+
+/* =========================================================
+   CSS: MANIFESTO-START
+========================================================= */
+.manifesto{padding:85px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.manifesto-line{display:flex;align-items:center;justify-content:space-between;gap:30px}
+.manifesto-text{font-size:clamp(28px,4.5vw,68px);line-height:1.08;letter-spacing:-.04em;font-weight:800;max-width:1050px}
+.manifesto-text em{font-style:normal;color:var(--acid)}
+.manifesto-code{font:10px monospace;color:#5d6264;white-space:nowrap}
+/* =========================================================
+   CSS: MANIFESTO-END
+========================================================= */
+
+/* =========================================================
+   CSS: PERSONALITY-START
+========================================================= */
+.personality-head{display:grid;grid-template-columns:1fr .7fr;gap:80px;align-items:end;margin-bottom:55px}
+.personality-head p{color:var(--muted);font-size:14px}
+.personality-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.personality-card{
+    min-height:360px;padding:25px;position:relative;overflow:hidden;
+    border:1px solid var(--line);background:linear-gradient(145deg,#15181b,#0c0e10);
+    transition:.4s var(--ease);cursor:pointer
+}
+.personality-card:hover,.personality-card.active{transform:translateY(-10px);border-color:rgba(216,255,62,.45)}
+.personality-card.active{box-shadow:inset 0 -2px var(--acid)}
+.personality-num{position:absolute;right:18px;top:18px;font:10px monospace;color:#5d6264}
+.personality-icon{font-size:54px;position:absolute;left:24px;top:55px;filter:grayscale(1)}
+.personality-card h3{position:absolute;left:24px;bottom:62px;font-size:25px}
+.personality-card p{position:absolute;left:24px;bottom:26px;color:#777d80;font-size:11px}
+.personality-result{
+    margin-top:20px;padding:30px;border:1px solid var(--line);
+    background:#0c0f10;display:grid;grid-template-columns:180px 1fr auto;gap:25px;align-items:center;
+}
+.result-label{font:10px monospace;color:#62686a}.result-title{font-size:28px;font-weight:900}.result-copy{color:var(--muted);font-size:12px}.result-score{font:900 34px monospace;color:var(--acid)}
+/* =========================================================
+   CSS: PERSONALITY-END
+========================================================= */
+
+/* =========================================================
+   CSS: CONFIGURATOR-START
+========================================================= */
+.configurator{background:#0a0c0d;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.config-layout{display:grid;grid-template-columns:1fr 1fr;min-height:720px}
+.config-stage{position:relative;border-right:1px solid var(--line);overflow:hidden;background:radial-gradient(circle at 50% 50%,#24292b,#0a0c0d 65%)}
+.config-stage::before{content:"CONFIG / LIVE";position:absolute;top:24px;left:24px;font:10px monospace;color:#646a6d}
+.config-bike{position:absolute;left:5%;right:5%;top:22%;height:48%}
+.config-bike svg{width:100%;height:100%}
+.config-data{position:absolute;left:24px;right:24px;bottom:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+.config-data div{padding:16px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.07)}
+.config-data small{display:block;color:#666;font:9px monospace}.config-data strong{display:block;margin-top:4px;font-size:20px}
+.config-controls{padding:55px}
+.config-controls h2{font-size:52px;line-height:.95;letter-spacing:-.05em}
+.control-group{margin-top:35px}
+.control-group label{display:flex;justify-content:space-between;font:10px monospace;color:#707578;margin-bottom:10px}
+.control-options{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.control-option{padding:13px 8px;border:1px solid var(--line);background:none;color:#a7acad;font-size:10px}
+.control-option.active{border-color:var(--acid);background:rgba(216,255,62,.08);color:var(--acid)}
+.config-total{display:flex;justify-content:space-between;align-items:end;margin-top:45px;padding-top:22px;border-top:1px solid var(--line)}
+.config-total span{font:10px monospace;color:#666}.config-total strong{font-size:30px;color:var(--acid)}
+/* =========================================================
+   CSS: CONFIGURATOR-END
+========================================================= */
+
+/* =========================================================
+   CSS: MODULES-START
+========================================================= */
+.module-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:55px}
+.module-head p{max-width:390px;color:var(--muted);font-size:13px}
+.module-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;grid-template-rows:310px 310px;gap:10px}
+.module-card{position:relative;overflow:hidden;border:1px solid var(--line);background:#111416;padding:25px}
+.module-card.large{grid-row:span 2;background:linear-gradient(145deg,#1b1f20,#0b0d0f)}
+.module-card::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(216,255,62,.05));pointer-events:none}
+.module-id{font:9px monospace;color:#62686a}.module-card h3{font-size:24px;margin-top:8px}.module-card p{position:absolute;bottom:24px;left:25px;right:25px;color:#777d80;font-size:11px}
+.module-art{position:absolute;right:8%;top:24%;width:70%;height:45%;opacity:.85}
+.module-art::before{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.16);transform:skew(-20deg) rotate(-8deg)}
+.module-art::after{content:"";position:absolute;left:20%;top:45%;width:65%;height:3px;background:var(--acid);box-shadow:0 0 25px rgba(216,255,62,.45)}
+/* =========================================================
+   CSS: MODULES-END
+========================================================= */
+
+/* =========================================================
+   CSS: JOURNAL-START
+========================================================= */
+.journal{background:#0b0d0e}
+.journal-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:50px}
+.journal-list{border-top:1px solid var(--line)}
+.journal-item{
+    display:grid;grid-template-columns:100px 1fr 260px 90px;gap:30px;
+    align-items:center;padding:27px 0;border-bottom:1px solid var(--line);
+    transition:.3s
+}
+.journal-item:hover{padding-left:15px;padding-right:15px;background:rgba(255,255,255,.025)}
+.journal-date{font:10px monospace;color:#62686a}.journal-title{font-size:22px;font-weight:800}.journal-desc{font-size:11px;color:#777d80}.journal-arrow{font-size:24px;text-align:right;color:var(--acid)}
+/* =========================================================
+   CSS: JOURNAL-END
+========================================================= */
+
+/* =========================================================
+   CSS: ROUTE-START
+========================================================= */
+.route-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:70px;align-items:center}
+.route-copy .title{margin-top:20px}
+.route-copy p{margin-top:28px;color:var(--muted);font-size:14px;max-width:430px}
+.route-card{position:relative;min-height:620px;border:1px solid var(--line);overflow:hidden;background:#111416}
+.map{
+    position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:55px 55px;
+}
+.road{position:absolute;width:115%;height:180px;left:-8%;top:34%;border:2px solid rgba(255,255,255,.13);border-radius:50%;transform:rotate(-17deg)}
+.road.two{top:48%;left:4%;transform:rotate(22deg);width:90%;height:130px}
+.route-line{position:absolute;width:72%;height:3px;background:var(--acid);left:15%;top:47%;transform:rotate(-18deg);box-shadow:0 0 30px rgba(216,255,62,.5)}
+.route-point{position:absolute;width:12px;height:12px;border:2px solid var(--acid);background:#0b0d0e;border-radius:50%;box-shadow:0 0 18px var(--acid)}
+.point-a{left:15%;top:61%}.point-b{left:48%;top:47%}.point-c{left:82%;top:35%}
+.route-label{position:absolute;padding:8px 11px;background:#080a0b;border:1px solid var(--line);font:9px monospace;color:#929799}
+.label-a{left:8%;top:67%}.label-b{left:44%;top:40%}.label-c{right:7%;top:28%}
+.route-meta{position:absolute;left:22px;right:22px;bottom:22px;display:flex;justify-content:space-between;font:9px monospace;color:#666}
+/* =========================================================
+   CSS: ROUTE-END
+========================================================= */
+
+/* =========================================================
+   CSS: BRAND-START
+========================================================= */
+.brand{border-top:1px solid var(--line);overflow:hidden}
+.brand-inner{position:relative}
+.brand-watermark{position:absolute;right:-5%;top:5%;font-size:clamp(130px,24vw,360px);font-weight:900;line-height:1;color:rgba(255,255,255,.025);letter-spacing:-.08em}
+.brand-content{position:relative;z-index:2;max-width:900px}
+.brand-content .title{margin-top:25px}
+.brand-content .title span{color:var(--acid)}
+.brand-copy{max-width:650px;margin-top:35px;color:#8d9396;font-size:15px}
+.brand-stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:70px;border:1px solid var(--line)}
+.brand-stat{padding:28px;border-right:1px solid var(--line)}.brand-stat:last-child{border:0}
+.brand-stat strong{font-size:34px}.brand-stat span{display:block;color:#62686a;font:9px monospace;margin-top:4px}
+/* =========================================================
+   CSS: BRAND-END
+========================================================= */
+
+/* =========================================================
+   CSS: FOOTER-START
+========================================================= */
+.footer{padding:55px 0 25px;border-top:1px solid var(--line)}
+.footer-top{display:flex;justify-content:space-between;gap:50px}
+.footer-desc{max-width:330px;color:#696f72;font-size:11px;margin-top:15px}
+.footer-links{display:flex;gap:55px}.footer-col{display:flex;flex-direction:column;gap:9px}.footer-col strong{font:10px monospace;color:#ddd;margin-bottom:4px}.footer-col a{font-size:11px;color:#696f72}.footer-col a:hover{color:var(--acid)}
+.footer-bottom{display:flex;justify-content:space-between;margin-top:70px;padding-top:18px;border-top:1px solid var(--line);font:9px monospace;color:#505659}
+/* =========================================================
+   CSS: FOOTER-END
+========================================================= */
+
+/* =========================================================
+   CSS: REVEAL-START
+========================================================= */
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+/* =========================================================
+   CSS: REVEAL-END
+========================================================= */
+
+/* =========================================================
+   CSS: RESPONSIVE-START
+========================================================= */
+@media(max-width:1050px){
+    .nav{gap:18px}
+    .hero-copy{width:65%}
+    .hero-visual{right:-25%;opacity:.55}
+    .personality-grid{grid-template-columns:repeat(2,1fr)}
+    .config-layout{grid-template-columns:1fr}.config-stage{min-height:600px;border-right:0;border-bottom:1px solid var(--line)}
+    .module-grid{grid-template-columns:1fr 1fr;grid-template-rows:310px 310px}.module-card.large{grid-row:span 1}
+}
+@media(max-width:760px){
+    .container{width:min(calc(100% - 30px),var(--max))}
+    .section{padding:95px 0}
+    .nav{position:absolute;left:15px;right:15px;top:75px;display:flex;flex-direction:column;padding:20px;background:rgba(7,8,9,.96);border:1px solid var(--line);opacity:0;visibility:hidden;transform:translateY(-10px);transition:.3s}
+    .nav.open{opacity:1;visibility:visible;transform:none}
+    .nav a{padding:8px}
+    .menu-btn{display:block}
+    .header-index{display:none}
+    .hero{min-height:980px;padding-top:145px;align-items:flex-start}
+    .hero-copy{width:100%}.hero-visual{width:120vw;right:-45%;top:61%;opacity:.4}
+    .hero-bottom{left:15px;right:15px}.hero-stats{gap:18px}
+    .manifesto-line{display:block}.manifesto-code{margin-top:25px}
+    .personality-head{grid-template-columns:1fr;gap:25px}.personality-grid{grid-template-columns:1fr 1fr}
+    .personality-card{min-height:280px}.personality-result{grid-template-columns:1fr;gap:12px}
+    .config-stage{min-height:430px}.config-controls{padding:35px 22px}.config-controls h2{font-size:42px}
+    .control-options{grid-template-columns:1fr 1fr}
+    .module-grid{grid-template-columns:1fr;grid-template-rows:auto}.module-card,.module-card.large{min-height:300px}
+    .journal-item{grid-template-columns:65px 1fr 35px}.journal-desc{display:none}
+    .route-layout{grid-template-columns:1fr;gap:35px}.route-card{min-height:500px}
+    .brand-stats{grid-template-columns:1fr 1fr}.brand-stat{border-bottom:1px solid var(--line)}.brand-stat:nth-child(2){border-right:0}
+    .footer-top{flex-direction:column}.footer-links{gap:30px;flex-wrap:wrap}.footer-bottom{flex-direction:column;gap:8px}
+}
+@media(max-width:480px){
+    .personality-grid{grid-template-columns:1fr}.personality-card{min-height:250px}
+    .hero-title{font-size:68px}.hero-stats .stat:nth-child(3){display:none}
+    .brand-stats{grid-template-columns:1fr}.brand-stat{border-right:0!important}
+    .footer-links{display:grid;grid-template-columns:1fr 1fr}
+}
+/* =========================================================
+   CSS: RESPONSIVE-END
+========================================================= */
+</style>
+</head>
+
+<body>
+
+<div class="noise"></div>
+<div class="grid-bg"></div>
+<div class="cursor-light"></div>
+
+<!-- =========================================================
+     HTML: INTRO-START
+========================================================= -->
+<div class="intro">
+    <div class="intro-inner">
+        <div class="intro-code">
+            RØUTE 09 / SYSTEM BOOT<br>
+            MOBILITY CULTURE LABORATORY / TAIWAN<br>
+            BUILD 09.26.01
+        </div>
+        <div class="intro-word">RØUTE <span>09</span></div>
+        <div class="intro-bar"><div class="intro-progress"></div></div>
+        <div class="intro-status"><span>INITIALIZING EXPERIENCE</span><span class="intro-percent">00%</span></div>
+    </div>
+</div>
+<!-- =========================================================
+     HTML: INTRO-END
+========================================================= -->
+
+<!-- =========================================================
+     HTML: HEADER-START
+========================================================= -->
+<header class="header">
+    <div class="container header-inner">
+        <a class="logo" href="#home">
+            <span class="logo-mark"><span>09</span></span>
+            RØUTE 09
+        </a>
+        <nav class="nav">
+            <a href="#home">首頁</a>
+            <a href="#personality">騎士人格</a>
+            <a href="#configurator">改裝實驗室</a>
+            <a href="#modules">零件系統</a>
+            <a href="#journal">騎士誌</a>
+            <a href="#brand">關於我們</a>
+        </nav>
+        <div class="header-right">
+            <span class="header-index">FIELD NOTE / 026</span>
+            <button class="menu-btn" aria-label="開啟選單">☰</button>
+        </div>
+    </div>
+</header>
+<!-- =========================================================
+     HTML: HEADER-END
+========================================================= -->
+
+<main>
+
+<!-- =========================================================
+     HTML: HERO-START
+========================================================= -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-copy reveal">
+            <div class="kicker hero-kicker">MOTORCYCLE CULTURE LAB / 2026</div>
+            <h1 class="hero-title">
+                讓車<br>
+                <span class="outline">更像</span><br>
+                <span class="acid">你。</span>
+            </h1>
+            <p class="hero-sub">
+                RØUTE 09 不把機車當成一台「交通工具」。
+                我們把它視為你的第二種語言——
+                從一顆螺絲、一盞燈，到車身比例與騎乘姿勢，
+                每個選擇都在說明你是誰。
+            </p>
+            <div class="hero-cta">
+                <a class="btn primary" href="#personality">開始探索你的騎士人格</a>
+                <a class="btn" href="#configurator">進入改裝實驗室 →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="machine">
+            <div class="machine-glow"></div>
+            <div class="ring"></div>
+
+            <!-- 純 SVG 機車主視覺：不依賴外部圖片 -->
+            <svg class="bike-svg" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" aria-label="RØUTE 09 概念街車">
+                <defs>
+                    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#a7adb0"/>
+                        <stop offset=".28" stop-color="#4c5255"/>
+                        <stop offset=".65" stop-color="#171a1c"/>
+                        <stop offset="1" stop-color="#080909"/>
+                    </linearGradient>
+                    <linearGradient id="darkmetal" x1="0" y1="0" x2="0" y2="1">
+                        <stop stop-color="#3d4245"/>
+                        <stop offset="1" stop-color="#090a0b"/>
+                    </linearGradient>
+                    <filter id="shadow">
+                        <feGaussianBlur stdDeviation="8"/>
+                    </filter>
+                </defs>
+
+                <ellipse cx="520" cy="580" rx="390" ry="35" fill="#000" opacity=".75" filter="url(#shadow)"/>
+
+                <!-- 後輪 -->
+                <circle cx="245" cy="475" r="112" fill="#080909" stroke="#3d4245" stroke-width="8"/>
+                <circle cx="245" cy="475" r="78" fill="none" stroke="#171a1c" stroke-width="15"/>
+                <circle cx="245" cy="475" r="25" fill="#2d3235"/>
+                <path d="M245 395v160M165 475h160M190 420l110 110M300 420L190 530" stroke="#51575a" stroke-width="4" opacity=".5"/>
+
+                <!-- 前輪 -->
+                <circle cx="760" cy="475" r="112" fill="#080909" stroke="#3d4245" stroke-width="8"/>
+                <circle cx="760" cy="475" r="78" fill="none" stroke="#171a1c" stroke-width="15"/>
+                <circle cx="760" cy="475" r="25" fill="#2d3235"/>
+                <path d="M760 395v160M680 475h160M705 420l110 110M815 420L705 530" stroke="#51575a" stroke-width="4" opacity=".5"/>
+
+                <!-- 車架 -->
+                <path d="M245 475 L385 330 L555 455 L760 475 L650 340 L505 325 L385 330" fill="none" stroke="#555b5e" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M385 330 L505 325 L560 455" fill="none" stroke="#151819" stroke-width="27"/>
+
+                <!-- 主車身 -->
+                <path d="M330 350 C365 275 430 238 535 260 L640 318 L575 385 L420 390 Z" fill="url(#metal)" stroke="#72787a" stroke-width="3"/>
+                <path d="M420 390 L575 385 L630 455 L450 455 Z" fill="#151819"/>
+                <path d="M475 285 L585 295 L635 330 L535 345 Z" fill="#080909"/>
+                <path d="M352 340 L430 285 L480 295 L430 350 Z" fill="#d8ff3e" opacity=".85"/>
+
+                <!-- 油箱 -->
+                <path d="M420 260 C455 205 535 190 595 225 L570 305 L475 310 Z" fill="url(#darkmetal)" stroke="#747a7c" stroke-width="3"/>
+                <path d="M450 240 L560 225" stroke="#d8ff3e" stroke-width="5"/>
+
+                <!-- 座椅 -->
+                <path d="M300 270 C360 235 430 225 475 250 L450 275 L335 295 Z" fill="#0a0b0c"/>
+                <path d="M315 265 C360 245 420 240 450 255" stroke="#62686a" stroke-width="4"/>
+
+                <!-- 前叉 -->
+                <path d="M650 300 L760 475" stroke="#81878a" stroke-width="14"/>
+                <path d="M690 300 L760 475" stroke="#303538" stroke-width="24"/>
+
+                <!-- 車頭 -->
+                <path d="M600 250 L690 255 L730 320 L660 350 L610 315 Z" fill="url(#darkmetal)" stroke="#666c6f" stroke-width="3"/>
+                <path d="M675 275 L730 292 L700 322 L655 310 Z" fill="#e8edf0"/>
+                <path d="M677 281 L720 295" stroke="#fff" stroke-width="4" opacity=".9"/>
+
+                <!-- 手把 -->
+                <path d="M620 240 L700 210 L770 225" fill="none" stroke="#5c6265" stroke-width="8"/>
+                <path d="M760 225 L790 245" stroke="#222628" stroke-width="12"/>
+
+                <!-- 排氣 -->
+                <path d="M430 425 C360 470 310 475 275 450" fill="none" stroke="#777d80" stroke-width="18"/>
+                <path d="M430 425 C360 470 310 475 275 450" fill="none" stroke="#151819" stroke-width="8"/>
+                <circle cx="270" cy="448" r="16" fill="#303538"/>
+
+                <!-- 螢光識別線 -->
+                <path d="M330 350 L420 390 L575 385 L630 455" fill="none" stroke="#d8ff3e" stroke-width="3" opacity=".9"/>
+                <circle cx="385" cy="330" r="5" fill="#d8ff3e"/>
+                <circle cx="650" cy="300" r="5" fill="#d8ff3e"/>
+            </svg>
+
+            <div class="hero-readout">
+                <div class="readout-row"><span>CHASSIS</span><b>R09-X</b></div>
+                <div class="readout-row"><span>WEIGHT</span><b>142 KG</b></div>
+                <div class="readout-row"><span>CHARACTER</span><b>URBAN / AGGRESSIVE</b></div>
+                <div class="readout-row"><span>STATUS</span><b>READY</b></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-bottom">
+        <div class="hero-scroll">SCROLL TO ENTER / ↓</div>
+        <div class="hero-stats">
+            <div class="stat"><strong>09</strong><span>ORIGIN</span></div>
+            <div class="stat"><strong>24</strong><span>MODULES</span></div>
+            <div class="stat"><strong>∞</strong><span>PERSONALITIES</span></div>
+        </div>
+    </div>
+</section>
+<!-- =========================================================
+     HTML: HERO-END
+========================================================= -->
+
+<!-- =========================================================
+     HTML: MANIFESTO-START
+========================================================= -->
+<section class="manifesto">
+    <div class="container">
+        <div class="manifesto-line reveal">
+            <div class="manifesto-text">
+                「真正的改裝，不是把車變得更貴。<br>
+                是讓你每次戴上安全帽時，都覺得——
+                <em>今天又想騎遠一點。</em>」
+            </div>
+            <div class="manifesto-code">NOTE 09 / 001<br>RIDER × MACHINE</div>
+        </div>
+    </div>
+</section>
+<!-- =========================================================
+     HTML: MANIFESTO-END
+========================================================= -->
+
+<!-- =========================================================
+     HTML: PERSONALITY-START
+========================================================= -->
+<section class="section" id="personality">
+    <div class="container">
+        <div class="personality-head reveal">
+            <div>
+                <div class="kicker">RIDER PROFILE / 01</div>
+                <h2 class="title" style="margin-top:20px">你的車，<br>是哪一種人？</h2>
+            </div>
+            <p>
+                選擇最接近你的騎乘方式。<br>
+                我們會用你的答案生成一組「RØUTE 09 騎士人格」，
+                再推薦適合你的改裝方向。
+            </p>
+        </div>
+
+        <div class="personality-grid reveal">
+            <article class="personality-card active" data-type="城市獵人">
+                <span class="personality-num">TYPE / 01</span>
+                <div class="personality-icon">◒</div>
+                <h3>城市獵人</h3>
+                <p>紅綠燈是節拍器，巷弄是捷徑。</p>
+            </article>
+            <article class="personality-card" data-type="山路玩家">
+                <span class="personality-num">TYPE / 02</span>
+                <div class="personality-icon">⌁</div>
+                <h3>山路玩家</h3>
+                <p>不追終點，只在乎下一個彎。</p>
+            </article>
+            <article class="personality-card" data-type="遠方派">
+                <span class="personality-num">TYPE / 03</span>
+                <div class="personality-icon">◎</div>
+                <h3>遠方派</h3>
+                <p>油箱裝滿，地圖永遠不夠大。</p>
+            </article>
+            <article class="personality-card" data-type="收藏家">
+                <span class="personality-num">TYPE / 04</span>
+                <div class="personality-icon">◇</div>
+                <h3>收藏家</h3>
+                <p>一顆螺絲，也值得被認真對待。</p>
+            </article>
+        </div>
+
+        <div class="personality-result reveal">
+            <div class="result-label">YOUR PROFILE</div>
+            <div>
+                <div class="result-title" data-result-title>城市獵人</div>
+                <div class="result-copy" data-result-copy>俐落、快速、懂得在城市縫隙裡找到自己的節奏。</div>
+            </div>
+            <div class="result-score">09/09</div>
+        </div>
+    </div>
+</section>
+<!-- =========================================================
+     HTML: PERSONALITY-END
+========================================================= -->
+
+<!-- =========================================================
+     HTML: CONFIGURATOR-START
+========================================================= -->
+<section class="section configurator" id="configurator">
+    <div class="container">
+        <div class="config-layout">
+            <div class="config-stage reveal">
+                <div class="config-bike">
+                    <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="cfgMetal" x1="0" y1="0" x2="1" y2="1">
+                                <stop stop-color="#c2c6c6"/>
+                                <stop offset=".35" stop-color="#555b5d"/>
+                                <stop offset="1" stop-color="#101213"/>
+                            </linearGradient>
+                        </defs>
+                        <ellipse cx="500" cy="490" rx="400" ry="25" fill="#000" opacity=".65"/>
+                        <circle cx="245" cy="410" r="100" fill="#090a0b" stroke="#62686a" stroke-width="8"/>
+                        <circle cx="755" cy="410" r="100" fill="#090a0b" stroke="#62686a" stroke-width="8"/>
+                        <path d="M245 410L390 285L560 390L755 410L650 300L500 285L390 285" fill="none" stroke="#4e5558" stroke-width="22" stroke-linejoin="round"/>
+                        <path d="M340 310C380 235 490 210 585 255L650 315L575 370L405 370Z" fill="url(#cfgMetal)" stroke="#7b8183" stroke-width="3"/>
+                        <path d="M405 370L575 370L635 420L450 420Z" fill="#151819"/>
+                        <path d="M420 260C465 205 550 205 600 245L565 300L470 305Z" fill="#222628" stroke="#747a7c" stroke-width="3"/>
+                        <path d="M660 290L755 410" stroke="#6b7274" stroke-width="16"/>
+                        <path d="M650 245L730 225L785 245" stroke="#555b5d" stroke-width="8"/>
+                        <path d="M360 365L450 410L575 405L635 420" stroke="#d8ff3e" stroke-width="4"/>
+                    </svg>
+                </div>
+                <div class="config-data">
+                    <div><small>ENGINE FEEL</small><strong data-power>+08%</strong></div>
+                    <div><small>VISUAL SCORE</small><strong data-style>82</strong></div>
+                    <div><small>PACKAGE</small><strong data-package>URBAN</strong></div>
+                </div>
+            </div>
+
+            <div class="config-controls reveal">
+                <div class="kicker">LIVE CONFIGURATOR</div>
+                <h2>把你的<br><span style="color:var(--acid)">車重新定義。</span></h2>
+
+                <div class="control-group">
+                    <label><span>01 / 車身風格</span><span data-style-label>城市黑</span></label>
+                    <div class="control-options">
+                        <button class="control-option active" data-style-value="城市黑" data-style-score="82">城市黑</button>
+                        <button class="control-option" data-style-value="機械銀" data-style-score="76">機械銀</button>
+                        <button class="control-option" data-style-value="競技白" data-style-score="91">競技白</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label><span>02 / 騎乘取向</span><span data-package-label>城市通勤</span></label>
+                    <div class="control-options">
+                        <button class="control-option active" data-package-value="URBAN" data-power-value="+08%" data-package-label-value="城市通勤">城市通勤</button>
+                        <button class="control-option" data-package-value="MOUNTAIN" data-power-value="+16%" data-package-label-value="山路攻彎">山路攻彎</button>
+                        <button class="control-option" data-package-value="TOURING" data-power-value="+11%" data-package-label-value="長途旅行">長途旅行</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label><span>03 / 燈光語言</span><span data-light-label>冷白</span></label>
+                    <div class="control-options">
+                        <button class="control-option active" data-light-value="冷白">冷白</button>
+                        <button class="control-option" data-light-value="暖黃">暖黃</button>
+                        <button class="control-option" data-light-value="極光綠">極光綠</button>
+                    </div>
+                </div>
+
+                <div class="config-total">
+                    <div><span>ESTIMATED BUILD</span><strong data-price>NT$ 68,800</strong></div>
+                    <button class="btn primary" data-build>建立我的配置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =========================================================
+     HTML: CONFIGURATOR-END
+========================================================= -->
+
+<!-- =========================================================
+     HTML: MODULES-START
+========================================================= -->
+<section class="section" id="modules">
+    <div class="container">
+        <div class="module-head reveal">
+            <div>
+                <div class="kicker">MODULAR SYSTEM / 09</div>
+                <h2 class="title" style="margin-top:20px">不是買零件。<br>是組一台自己的車。</h2>
+            </div>
+            <p>
+                RØUTE 09 將改裝拆成可以自由組合的模組。
+                你可以先改姿態，再改制動，也可以從一盞燈開始。
+                沒有標準答案。
+            </p>
+        </div>
+
+        <div class="module-grid">
+            <article class="module-card large reveal">
+                <div class="module-id">MODULE / 001</div>
+                <h3>FRAME LANGUAGE</h3>
+                <div class="module-art" style="width:75%;height:55%;right:10%;top:25%"></div>
+                <p>車身比例是第一句話。從尾段、座墊到側蓋，重新整理你的車的視覺重心。</p>
+            </article>
+            <article class="module-card reveal">
+                <div class="module-id">MODULE / 002</div>
+                <h3>LIGHT SIGNATURE</h3>
+                <div class="module-art" style="width:55%;height:35%;right:7%;top:25%"></div>
+                <p>讓別人在後照鏡裡記住你的輪廓。</p>
+            </article>
+            <article class="module-card reveal">
+                <div class="module-id">MODULE / 003</div>
+                <h3>CONTROL</h3>
+                <div class="module-art" style="width:52%;height:45%;right:7%;top:20%"></div>
+                <p>把手、拉桿、腳踏，每一次接觸都應該有理由。</p>
+            </article>
+            <article class="module-card reveal">
+                <div class="module-id">MODULE / 004</div>
+                <h3>STOPPING POWER</h3>
+                <div class="module-art" style="width:55%;height:55%;right:8%;top:18%;border-radius:50%"></div>
+                <p>速度不是唯一的性能。能不能漂亮地停下來，同樣重要。</p>
+            </article>
+            <article class="module-card reveal">
+                <div class="module-id">MODULE / 005</div>
+                <h3>URBAN ARMOR</h3>
+                <div class="module-art" style="width:60%;height:38%;right:5%;top:24%"></div>
+                <p>面對城市每天的擦碰、雨水與灰塵，保護也是設計的一部分。</p>
+            </article>
+        </div>
+    </div>
+</section>
+<!-- =========================================================
+     HTML: MODULES-END
+========================================================= -->
+
+<!-- =========================================================
+     HTML: JOURNAL-START
+========================================================= -->
+<section class="section journal" id="journal">
+    <div class="container">
+        <div class="journal-head reveal">
+            <div>
+                <div class="kicker">RØUTE JOURNAL</div>
+                <h2 class="title" style="margin-top:20px">騎士誌。</h2>
+            </div>
+            <span class="muted" style="font:10px monospace">FIELD NOTES / 2026</span>
+        </div>
+
+        <div class="journal-list reveal">
+            <article class="journal-item">
+                <div class="journal-date">08.21</div>
+                <div class="journal-title">凌晨四點，台三線的第一個彎</div>
+                <div class="journal-desc">我們問了五個騎士：為什麼你願意在天還沒亮時出發？</div>
+                <div class="journal-arrow">↗</div>
+            </article>
+            <article class="journal-item">
+                <div class="journal-date">08.14</div>
+                <div class="journal-title">一盞尾燈，如何改變一台車的性格？</div>
+                <div class="journal-desc">從視覺辨識、光型到城市夜間騎乘的心理感受。</div>
+                <div class="journal-arrow">↗</div>
+            </article>
+            <article class="journal-item">
+                <div class="journal-date">08.06</div>
+                <div class="journal-title">改裝不是越多越好：我們拆掉了 17 個零件</div>
+                <div class="journal-desc">極簡改裝實驗：只留下真正有必要的東西。</div>
+                <div class="journal-arrow">↗</div>
+            </article>
+            <article class="journal-item">
+                <div class="journal-date">07.29</div>
+                <div class="journal-title">為什麼有人騎十年，車還像第一天？</div>
+                <div class="journal-desc">聊聊保養、痕跡與一台車真正開始「屬於你」的時刻。</div>
+                <div class="journal-arrow">↗</div>
+            </article>
+        </div>
+    </div>
+</section>
+<!-- =========================================================
+     HTML: JOURNAL-END
+========================================================= -->
+
+<!-- =========================================================
+     HTML: ROUTE-START
+========================================================= -->
+<section class="section" id="route">
+    <div class="container">
+        <div class="route-layout">
+            <div class="route-copy reveal">
+                <div class="kicker">WEEKEND / ROUTE 03</div>
+                <h2 class="title">今天，<br><span style="color:var(--acid)">去哪裡？</span></h2>
+                <p>
+                    有些路不是導航會推薦的。
+                    RØUTE 09 每月挑選一條「值得騎」的路，
+                    不追求打卡點，而是找一段能讓你真正安靜下來的路。
+                </p>
+                <a class="btn" href="#brand" style="margin-top:28px">查看本月路線 →</a>
+            </div>
+
+            <div class="route-card reveal">
+                <div class="map"></div>
+                <div class="road"></div>
+                <div class="road two"></div>
+                <div class="route-line"></div>
+                <div class="route-point point-a"></div>
+                <div class="route-point point-b"></div>
+                <div class="route-point point-c"></div>
+                <div class="route-label label-a">START / 04:40</div>
+                <div class="route-label label-b">COFFEE / 06:15</div>
+                <div class="route-label label-c">VIEW / 07:20</div>
+                <div class="route-meta"><span>RØUTE / 03</span><span>142 KM</span><span>↑ 1,240 M</span><span>DIFFICULTY / 02</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =========================================================
+     HTML: ROUTE-END
+========================================================= -->
+
+<!-- =========================================================
+     HTML: BRAND-START
+========================================================= -->
+<section class="section brand" id="brand">
+    <div class="container brand-inner">
+        <div class="brand-watermark">09</div>
+        <div class="brand-content reveal">
+            <div class="kicker">ABOUT RØUTE 09</div>
+            <h2 class="title">
+                我們不想<br>
+                <span>賣你一台更帥的車。</span><br>
+                我們想讓你<br>
+                更想騎車。
+            </h2>
+            <p class="brand-copy">
+                RØUTE 09 是一個從台灣出發的機車文化實驗室。
+                我們研究零件、設計車身、測試騎乘，也記錄騎士。
+                因為我們相信，機車真正迷人的地方，
+                從來不是規格表上的數字，而是它把你帶去什麼地方。
+                <br><br>
+                所以我們做零件，也做故事；做產品，也做路線。
+                讓每一次出發，都有一點值得記住的東西。
+            </p>
+
+            <div class="brand-stats">
+                <div class="brand-stat"><strong>09</strong><span>ORIGIN YEAR / CONCEPT</span></div>
+                <div class="brand-stat"><strong>24</strong><span>MODULAR PARTS</span></div>
+                <div class="brand-stat"><strong>37</strong><span>FIELD TESTS</span></div>
+                <div class="brand-stat"><strong>∞</strong><span>ROUTES TO DISCOVER</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =========================================================
+     HTML: BRAND-END
+========================================================= -->
+
+</main>
+
+<!-- =========================================================
+     HTML: FOOTER-START
+========================================================= -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div>
+                <a class="logo" href="#home">
+                    <span class="logo-mark"><span>09</span></span>
+                    RØUTE 09
+                </a>
+                <p class="footer-desc">
+                    機車改裝 × 騎士文化 × 城市移動。
+                    從台灣出發，往每一條值得騎的路前進。
+                </p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <strong>EXPLORE</strong>
+                    <a href="#personality">騎士人格</a>
+                    <a href="#configurator">改裝實驗室</a>
+                    <a href="#modules">零件系統</a>
+                </div>
+                <div class="footer-col">
+                    <strong>CULTURE</strong>
+                    <a href="#journal">騎士誌</a>
+                    <a href="#route">本月路線</a>
+                    <a href="#brand">關於我們</a>
+                </div>
+                <div class="footer-col">
+                    <strong>FOLLOW</strong>
+                    <a href="#">Instagram</a>
+                    <a href="#">YouTube</a>
+                    <a href="#">LINE</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 RØUTE 09 / ALL RIGHTS RESERVED</span>
+            <span>RIDE FAR / STAY CURIOUS</span>
+        </div>
+    </div>
+</footer>
+<!-- =========================================================
+     HTML: FOOTER-END
+========================================================= -->
+
+<script>
+/* =========================================================
+   JS: INTRO-START
+========================================================= */
+const intro=document.querySelector(".intro");
+const introProgress=document.querySelector(".intro-progress");
+const introPercent=document.querySelector(".intro-percent");
+
+let progress=0;
+const bootTimer=setInterval(()=>{
+    progress+=2;
+    if(progress>100) progress=100;
+    introProgress.style.width=progress+"%";
+    introPercent.textContent=String(progress).padStart(2,"0")+"%";
+    if(progress===100){
+        clearInterval(bootTimer);
+        setTimeout(()=>intro.classList.add("done"),350);
+    }
+},28);
+/* =========================================================
+   JS: INTRO-END
+========================================================= */
+
+/* =========================================================
+   JS: HEADER-START
+========================================================= */
+const header=document.querySelector(".header");
+const menuBtn=document.querySelector(".menu-btn");
+const nav=document.querySelector(".nav");
+
+window.addEventListener("scroll",()=>{
+    header.classList.toggle("scrolled",window.scrollY>35);
+});
+
+menuBtn.addEventListener("click",()=>{
+    nav.classList.toggle("open");
+});
+
+document.querySelectorAll(".nav a").forEach(link=>{
+    link.addEventListener("click",()=>nav.classList.remove("open"));
+});
+/* =========================================================
+   JS: HEADER-END
+========================================================= */
+
+/* =========================================================
+   JS: CURSOR-START
+========================================================= */
+const cursorLight=document.querySelector(".cursor-light");
+window.addEventListener("mousemove",e=>{
+    cursorLight.style.left=e.clientX+"px";
+    cursorLight.style.top=e.clientY+"px";
+});
+/* =========================================================
+   JS: CURSOR-END
+========================================================= */
+
+/* =========================================================
+   JS: REVEAL-START
+========================================================= */
+const revealObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+        }
+    });
+},{threshold:.12});
+
+document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
+/* =========================================================
+   JS: REVEAL-END
+========================================================= */
+
+/* =========================================================
+   JS: PERSONALITY-START
+========================================================= */
+const personalityData={
+    "城市獵人":{
+        copy:"俐落、快速、懂得在城市縫隙裡找到自己的節奏。你的車不需要太多廢話，乾淨、敏捷、有一點危險感。",
+    },
+    "山路玩家":{
+        copy:"你在乎的是彎道裡那三秒的感覺。制動、輪胎、操控與車身回饋，比馬力數字更重要。",
+    },
+    "遠方派":{
+        copy:"你相信地圖的邊界只是建議。舒適、可靠、收納與續航，是你的真正性能。",
+    },
+    "收藏家":{
+        copy:"你會注意別人看不到的地方。一顆螺絲、一條縫、一個材質交界，都值得被做好。",
+    }
+};
+
+const personalityCards=document.querySelectorAll(".personality-card");
+const resultTitle=document.querySelector("[data-result-title]");
+const resultCopy=document.querySelector("[data-result-copy]");
+
+personalityCards.forEach(card=>{
+    card.addEventListener("click",()=>{
+        personalityCards.forEach(c=>c.classList.remove("active"));
+        card.classList.add("active");
+        const type=card.dataset.type;
+        resultTitle.textContent=type;
+        resultCopy.textContent=personalityData[type].copy;
+    });
+});
+/* =========================================================
+   JS: PERSONALITY-END
+========================================================= */
+
+/* =========================================================
+   JS: CONFIGURATOR-START
+========================================================= */
+const styleButtons=document.querySelectorAll("[data-style-value]");
+const packageButtons=document.querySelectorAll("[data-package-value]");
+const lightButtons=document.querySelectorAll("[data-light-value]");
+
+const styleLabel=document.querySelector("[data-style-label]");
+const packageLabel=document.querySelector("[data-package-label]");
+const lightLabel=document.querySelector("[data-light-label]");
+const powerOutput=document.querySelector("[data-power]");
+const styleOutput=document.querySelector("[data-style]");
+const packageOutput=document.querySelector("[data-package]");
+const priceOutput=document.querySelector("[data-price]");
+
+let buildPrice=68800;
+
+styleButtons.forEach(button=>{
+    button.addEventListener("click",()=>{
+        styleButtons.forEach(b=>b.classList.remove("active"));
+        button.classList.add("active");
+        styleLabel.textContent=button.dataset.styleValue;
+        styleOutput.textContent=button.dataset.styleScore;
+        buildPrice=68800+Number(button.dataset.styleScore)-82;
+        priceOutput.textContent="NT$ "+buildPrice.toLocaleString();
+    });
+});
+
+packageButtons.forEach(button=>{
+    button.addEventListener("click",()=>{
+        packageButtons.forEach(b=>b.classList.remove("active"));
+        button.classList.add("active");
+        packageLabel.textContent=button.dataset.packageLabelValue;
+        powerOutput.textContent=button.dataset.powerValue;
+        packageOutput.textContent=button.dataset.packageValue;
+    });
+});
+
+lightButtons.forEach(button=>{
+    button.addEventListener("click",()=>{
+        lightButtons.forEach(b=>b.classList.remove("active"));
+        button.classList.add("active");
+        lightLabel.textContent=button.dataset.lightValue;
+    });
+});
+
+document.querySelector("[data-build]").addEventListener("click",event=>{
+    event.currentTarget.textContent="配置已建立 ✓";
+    setTimeout(()=>event.currentTarget.textContent="建立我的配置",1500);
+});
+/* =========================================================
+   JS: CONFIGURATOR-END
+========================================================= */
+
+/* =========================================================
+   JS: SMOOTH-LINK-START
+========================================================= */
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+    link.addEventListener("click",event=>{
+        const target=document.querySelector(link.getAttribute("href"));
+        if(target){
+            event.preventDefault();
+            target.scrollIntoView({behavior:"smooth",block:"start"});
+        }
+    });
+});
+/* =========================================================
+   JS: SMOOTH-LINK-END
+========================================================= */
+</script>
+</body>
+</html>

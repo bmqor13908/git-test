@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何成為前端工程師 | 煉鋼實戰指南</title>
+    <style>
+        :root {
+    --bg-dark: #1E1E1E;      /* 主背景：深暗碳黑，像工廠鋼鐵或暗色水泥 */
+    --bg-panel: #2D2D2D;     /* 次背景：深灰，用於卡片與區塊分隔 */
+    --text-light: #F5F5F5;   /* 主文字：防鏽白，高對比易讀 */
+    --text-muted: #A0A0A0;   /* 次文字：水泥灰，用於說明字體 */
+    --iron-orange: #FFB703;  /* 點綴亮色：工程警示橘，用於按鈕、重點標籤 */
+    --border-gray: #4A4A4A;  /* 邊框顏色：鉚釘與鋼鐵灰 */
+}
+
+/* 消除所有瀏覽器的預設邊距，並統一計算模式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 設定整個網頁的底色與基礎文字 */
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+    /* ==========================================================================
+   2. 通用元件：工業風鋼鐵按鈕 (CTA Button)
+   ========================================================================== */
+
+.cta-btn {
+    background-color: var(--iron-orange); /* 警示橘底色 */
+    color: #111111;                       /* 極深黑文字，確保對比度 */
+    border: 2px solid #111111;            /* 粗黑鋼條邊框 */
+    font-weight: bold;                    /* 粗體字 */
+    letter-spacing: 1px;                  /* 字距微調，增加扎實感 */
+    cursor: pointer;                      /* 滑鼠移上去變成手指圖標 */
+    transition: all 0.15s ease;           /* 讓所有動畫過渡更平滑不生硬 */
+    text-transform: uppercase;            /* 英文自動轉大寫 */
+    
+    /* 工業風核心：利用陰影做出方正、硬質的立體塊狀感，而不是傳統的漸層陰影 */
+    box-shadow: 4px 4px 0px 0px var(--border-gray); 
+}
+
+/* 當滑鼠懸停在按鈕上時的視覺回饋 */
+.cta-btn:hover {
+    /* 物理位移效果：往右下方壓低 2 像素 */
+    transform: translate(2px, 2px); 
+    
+    /* 同時把陰影縮小 2 像素，模擬按鈕真的被「壓下去」的物理機械感 */
+    box-shadow: 2px 2px 0px 0px var(--border-gray); 
+}
+
+/* 輔助樣式：小尺寸按鈕（用於導覽列） */
+.mini-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+/* 輔助樣式：大尺寸按鈕（用於 Hero 首頁區） */
+.main-btn {
+    padding: 16px 36px;
+    font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   3. 個別區塊：工業風頂部導覽列 (Navbar)
+   ========================================================================== */
+
+.navbar {
+    display: flex;                  /* 啟用彈性盒子排版，讓內容自動橫向並排 */
+    justify-content: space-between; /* 讓 Logo 靠最左邊，按鈕靠最右邊，兩端對齊 */
+    align-items: center;            /* 讓左邊的文字與右邊的按鈕在垂直方向垂直置中 */
+    padding: 20px 5%;               /* 上下內邊距 20px，左右留出 5% 的工程安全安全範圍 */
+    background-color: rgba(30, 30, 30, 0.95); /* 深暗碳黑背景，帶有 95% 的微透光感 */
+    border-bottom: 3px solid var(--border-gray); /* 底部加上一條厚實的鋼鐵灰工廠邊框 */
+    
+    /* 讓導覽列釘在螢幕最上方，滾動滑鼠時不會消失 */
+    position: sticky;
+    top: 0;
+    z-index: 100; /* 確保導覽列的層級永遠在最上層，不會被網頁其他內容遮擋 */
+}
+
+/* Logo 樣式設定 */
+.logo {
+    font-size: 1.5rem;              /* 放大字體 */
+    font-weight: 900;               /* 使用最粗的重工業級字體體重 */
+    letter-spacing: 2px;            /* 拉開字距，營造冷酷的科技感 */
+    color: var(--text-light);       /* 預設為防鏽白 */
+}
+
+/* 針對 Logo 內部的特定字詞進行染色 */
+.logo span {
+    color: var(--iron-orange);      /* 把 LAB 三個字單獨染成工程警示橘 */
+}
+
+/* ==========================================================================
+   4. 個別區塊：首頁主視覺大圖區 (Hero Section)
+   ========================================================================== */
+
+.hero-section {
+    padding: 120px 5%;          /* 上下大幅度留白 120px，營造大氣的視覺開場 */
+    display: flex;              /* 啟用彈性盒子 */
+    align-items: center;        /* 垂直置中 */
+    justify-content: center;    /* 水平置中 */
+    text-align: center;         /* 讓內部所有文字全部居中對齊 */
+    min-height: 85vh;           /* 讓這個區塊的高度至少佔據整個螢幕高度的 85% */
+    border-bottom: 2px dashed var(--border-gray); /* 底部加上一條工業風的「虛線」鋼鐵邊框 */
+    
+    /* 工業風靈魂：利用 CSS 放射漸層，打造出點陣顆粒（Dot Matrix）的工廠重工業背景 */
+    background: radial-gradient(circle, #2D2D2D 10%, transparent 11%);
+    background-size: 20px 20px; /* 控制點陣顆粒的疏密間距 */
+}
+
+/* 警示徽章樣式 */
+.badge {
+    background-color: var(--bg-panel);  /* 深灰面板底色 */
+    border: 1px solid var(--border-gray); /* 細鋼灰邊框 */
+    padding: 6px 12px;                  /* 內邊距，做成長條狀 */
+    font-size: 0.85rem;                 /* 精緻的小字體 */
+    letter-spacing: 1px;                /* 字距拉開 */
+    color: var(--iron-orange);          /* 警示橘字體 */
+    display: inline-block;              /* 讓標籤可以正常設定上下邊距 */
+    margin-bottom: 24px;                /* 與下方大標題拉開距離 */
+}
+
+/* 主標題 <h1> */
+.hero-content h1 {
+    font-size: 3.5rem;                  /* 巨型重工業感字體大小 */
+    font-weight: 900;                   /* 極粗體 */
+    line-height: 1.25;                  /* 緊湊的行高，增加視覺重擊感 */
+    margin-bottom: 24px;                /* 與下方副標題拉開距離 */
+    letter-spacing: -1px;               /* 刻意縮小字距，讓大字看起來更扎實、有份量 */
+}
+
+/* 主標題內部的重點染色 */
+.hero-content h1 span {
+    color: var(--iron-orange);          /* 關鍵字染色 */
+    background-color: rgba(255, 183, 3, 0.08); /* 後方加上淡淡的橘色半透明背光，像剛出爐的熔岩 */
+    padding: 0 12px;                    /* 左右留出一點工程緩衝 */
+}
+
+/* 副標題段落 <p> */
+.hero-content p {
+    font-size: 1.2rem;                  /* 比一般字體稍大 */
+    color: var(--text-muted);           /* 使用沉穩的水泥灰 */
+    max-width: 620px;                   /* 限制最大寬度，防止文字在寬螢幕上拉得太長，導致眼睛難以閱讀 */
+    margin: 0 auto 40px;                /* 上方 0、左右自動置中、下方留出 40px 給按鈕 */
+}
+
+/* ==========================================================================
+   5. 個別區塊：三大核心鍛造階段 (Steps Section)
+   ========================================================================== */
+
+/* 區塊整體外盒 */
+.steps-section {
+    padding: 100px 5%;          /* 上下留白 100px，與 Hero 區產生視覺區隔 */
+    border-bottom: 2px dashed var(--border-gray); /* 底部一樣使用工業剪裁虛線 */
+}
+
+/* 區塊大標題 <h2> */
+.section-title {
+    text-align: center;         /* 標題置中 */
+    font-size: 2.2rem;          /* 大字體 */
+    margin-bottom: 60px;        /* 與下方卡片群保持大幅度物理距離 */
+    font-weight: 800;           /* 粗體 */
+    letter-spacing: 1px;
+}
+
+/* 網格大容器：響應式排版的靈魂 */
+.grid-container {
+    display: grid;              /* 核心：啟用網格布局模式 */
+    
+    /* 終極響應式語法：自動計算欄數。
+       每個欄位最小 280px，最大均分剩餘空間 (1fr)。
+       這行程式碼能讓網頁在手機上自動變單行，在電腦上自動變三行！ */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    
+    gap: 30px;                  /* 卡片與卡片之間的「工業零件間隙」 */
+    max-width: 1200px;          /* 限制最大寬度，防止在大螢幕上拉得太開 */
+    margin: 0 auto;             /* 讓整個網格區域在網頁正中間 */
+}
+
+/* 獨立卡片樣式 */
+.card {
+    background-color: var(--bg-panel);  /* 次要背景：深灰鋼鐵面板色 */
+    border: 2px solid var(--border-gray); /* 厚實的鋼灰邊框 */
+    padding: 40px 30px;                  /* 卡片內部留白，維持閱讀舒適度 */
+    position: relative;                  /* 啟用相對定位，作為內部大數字的定位錨點 */
+    transition: border-color 0.2s ease;  /* 讓邊框顏色變化時有平滑過渡 */
+}
+
+/* 滑鼠移入卡片時的微互動 */
+.card:hover {
+    border-color: var(--iron-orange);    /* 邊框變亮橘色，模擬機器過電啟動的視覺效果 */
+}
+
+/* 卡片右上角的巨大工業流水號 */
+.card-num {
+    position: absolute;         /* 啟用絕對定位，脫離正常文字排版 */
+    top: 15px;                  /* 距離卡片頂部 15px */
+    right: 20px;                /* 距離卡片右邊 20px */
+    font-size: 2.5rem;          /* 巨型數字 */
+    font-weight: 900;           /* 超粗體 */
+    
+    /* 關鍵細節：使用極低透明度的警示橘色，讓它像淡淡的浮水印融入背景，不干擾前排文字 */
+    color: rgba(255, 183, 3, 0.12); 
+}
+
+/* 卡片內的小標題 <h3> */
+.card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;        /* 與下方說明文字拉開距離 */
+    color: var(--iron-orange);  /* 使用核心工程橘色 */
+}
+
+/* 卡片內的說明文字 <p> */
+.card p {
+    color: var(--text-muted);   /* 水泥灰字體，降低視覺權重 */
+    font-size: 1rem;
+    text-align: justify;        /* 文字左右對齊，看起來像說明書一樣嚴謹 */
+}
+
+/* ==========================================================================
+   6. 個別區塊：行動呼籲註冊區 (CTA Section) & 頁尾 (Footer)
+   ========================================================================== */
+
+/* 註冊區大背景 */
+.cta-section {
+    padding: 100px 5%;
+    background-color: #161616;          /* 比主背景再更深一點的工廠重油墨黑 */
+}
+
+/* 註冊核心控制箱 (Control Box) */
+.cta-box {
+    max-width: 620px;                   /* 限制寬度，集中視覺焦點 */
+    margin: 0 auto;                     /* 水平置中 */
+    text-align: center;                 /* 文字全部置中 */
+    border: 3px solid var(--iron-orange); /* 工業靈魂：極粗的工程警示橘色鋼條邊框 */
+    padding: 50px 30px;                 /* 內部大面積留白 */
+    background-color: var(--bg-dark);   /* 內盒用回主碳黑色 */
+    
+    /* 使用硬質方正陰影，讓整個控制箱像是重裝嵌在網頁上 */
+    box-shadow: 8px 8px 0px 0px var(--border-gray); 
+}
+
+.cta-box h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.cta-box p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 36px;                /* 與下方的輸入表單拉開物理距離 */
+}
+
+/* 表單布局配置 */
+.cta-form {
+    display: flex;                      /* 啟用彈性盒子 */
+    gap: 12px;                          /* 輸入框與按鈕之間的機械間隙 */
+}
+
+/* Email 輸入框本體 */
+#email-input {
+    flex: 1;                            /* 核心：自動吞噬並填滿剩餘的所有寬度 */
+    padding: 16px;                      /* 舒適的輸入空間 */
+    background-color: var(--bg-panel);  /* 深灰控制面板底色 */
+    border: 2px solid var(--border-gray); /* 鋼灰邊框 */
+    color: var(--text-light);           /* 使用防鏽白字體 */
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+/* 當使用者點擊輸入框、準備打字時 (Focus 狀態) */
+#email-input:focus {
+    outline: none;                      /* 拔掉瀏覽器內建醜醜的藍色外框線 */
+    border-color: var(--iron-orange);   /* 邊框瞬間通電，變成核心工程橘色 */
+    background-color: #333333;          /* 背景微幅變亮，給予極佳的輸入反饋 */
+}
+
+/* 修正註冊表單內的按鈕 */
+.form-btn {
+    padding: 0 28px;                    /* 調整兩側配重，讓它跟輸入框等高、視覺飽滿 */
+}
+
+/* 互動訊息提示盒子 */
+.form-message {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    min-height: 24px;                   /* 設定最小高度，防止文字出現時畫面產生突兀的推擠跳動 */
+}
+
+/* 7. 網頁頁尾 Footer */
+footer {
+    text-align: center;                 /* 文字置中 */
+    padding: 40px 20px;                 /* 上下留白 */
+    border-top: 1px solid var(--border-gray); /* 與上方用一條細鋼絲線隔開 */
+    color: var(--text-muted);           /* 水泥灰低調字體 */
+    font-size: 0.85rem;                 /* 精緻小字 */
+}
+
+/* ==========================================================================
+   7. 網頁靈魂：工業自動化互動控制 (JavaScript)
+   ========================================================================== */
+
+// --------------------------------------------------------------------------
+// 流程一：自動化定位滑動（平滑滾動）
+// --------------------------------------------------------------------------
+
+// 1. 獲取網頁中需要綁定滑動事件的兩個按鈕
+const heroBtn = document.querySelector('.main-btn'); // 首頁大按鈕
+const navBtn = document.querySelector('.mini-btn');   // 導覽列小按鈕
+
+// 2. 定義一個專門負責平滑滑動到「註冊控制箱」的控制函數
+function scrollToRegister() {
+    // 透過唯一身分證 id="register" 找到該註冊大區塊
+    const registerSection = document.getElementById('register');
+    
+    // 命令瀏覽器平滑滾動到該元件的視覺範圍內
+    registerSection.scrollIntoView({ 
+        behavior: 'smooth', // 平滑滾動，拒絕突兀的瞬間跳轉
+        block: 'center'     // 滾動到定位後，將該區塊置中顯示在螢幕正中間
+    });
+}
+
+// 3. 把點擊監聽器（Click Listener）焊接到這兩個按鈕上
+if (heroBtn) heroBtn.addEventListener('click', scrollToRegister);
+if (navBtn) navBtn.addEventListener('click', scrollToRegister);
+
+
+// --------------------------------------------------------------------------
+// 流程二：攔截表單並即時響應（表單控制）
+// --------------------------------------------------------------------------
+
+// 1. 抓取表單本體、Email 輸入框以及準備用來顯示訊息的隱形盒子
+const landingForm = document.getElementById('landing-form');
+const emailInput = document.getElementById('email-input');
+const msgBox = document.getElementById('form-msg');
+
+// 2. 監聽表單的 submit（提交）事件
+if (landingForm) {
+    landingForm.addEventListener('submit', function(event) {
+        
+        // 核心安全步驟：阻止表單的「原生預設行為」
+        // 如果不寫這行，網頁送出時會強制重新整理（轉圈圈），我們剛剛寫的動畫和狀態就會全部消失！
+        event.preventDefault(); 
+        
+        // 擷取使用者在輸入框中實際打下的電子郵件字串，並用 trim() 拔掉不小心打到的前後空白
+        const userEmail = emailInput.value.trim();
+        
+        if (userEmail) {
+            // 模擬將資料傳輸至後端鋼鐵工廠成功，開始啟動前端面板響應
+            msgBox.style.color = '#FFB703'; // 將訊息文字染成核心警示橘色
+            msgBox.innerHTML = `⚡ [系統通知]：連線成功！修煉地圖已熔煉並發送至 <u>${userEmail}</u>`;
+            
+            // 清空輸入框欄位，方便下一位使用者輸入，或者讓畫面看起來乾淨
+            emailInput.value = '';
+            
+            // 讓輸入框暫時失去焦點（Blur），讓手機的虛擬鍵盤自動收合，提供頂級體驗
+            emailInput.blur();
+        } else {
+            // 萬一發生意外的防錯機制
+            msgBox.style.color = '#FF4444'; // 錯誤警示紅色
+            msgBox.innerText = '❌ [錯誤]：欄位不可為空，請輸入正確的傳輸地址。';
+        }
+    });
+}
+
+
+
+    </style>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <!-- 導覽列 -->
+    <header class="navbar">
+        <div class="logo">FRONTEND // <span>LAB</span></div>
+        <button class="cta-btn mini-bth">開始修練</button>
+    </header>
+    <!-- 首頁大圖區(Gero section) -->
+    <section class="hero-section" 
+        <div class="hero-content">
+            <span class="badge">🔥 2026 鋼鐵重工業級指南</span>
+            <h1>打鐵還需自身硬<br>如何成為<span>前端工程師</span>
+            <h1>
+            <p>拒絕速成班的虛胖,從底層邏輯到實戰工程,鍛造屬於你的程式鋼鐵骨架。</p>
+            <div class="hero-action">
+                <button class="cta-btn main-btn">免費領取修煉路線圖</button>
+            </div>
+        </div>
+    </section>
+    <!-- 核心三步驟(steps Section) -->
+    <section class="steps-section">
+        <h2 class="section-title">🔧 三大核心鍛造階段</h2>
+        <div class="grid-container"  
+        
+        <!-- 卡片01 -->
+        <div class="card" 
+            <div class="card-num">01</div>
+            <h3>基礎地基築構</h3>
+            <p>精通 HTM5 語意化、CSS3 現代布局(Flex/Grid)與原生 Javascript 異步處理
+        </div>
+        <!-- 卡片02 -->
+        <div class="card">
+            <div class="card-num">03</div>
+            <h3>工程化落地</h3>
+            <p>學習 Vite 建構工具、Git 版本控制、CI/CD 自動化部屬與效能優化技術。</p>
+        </div>
+
+        </div>
+    </section>
+    <!-- 註冊行動呼籲區(CTA Section) -->
+     <section> id="register" Class="cta-section">
+        <div class="cta-box"
+            <h2>加入前端煉鋼廠</h2>
+            <p>輸入 Email，立刻獲取最新前端技術棧雷達圖與獨家學習資源。</p>
+    
+            <!-- 註冊表單 -->
+            <form id="landing-form" class="cta-form">
+                <input type="email" id="email-input" placeholder="請輸入您的 Email 地址" required>
+                <button type="submit" class="cta-byn">立即解鎖</button>
+            </form>
+            
+            <!-- 用來顯示成功或失敗訊息的容器 -->
+             <div id="form-msg" class="form-message"></div>
+     </section>
+
+     <!-- 頁尾 -->
+     <footer>
+        <p>2026 FRONTEND LAB. Built with steel & code.</p>
+     </footer>
+</body>
+
+</html>

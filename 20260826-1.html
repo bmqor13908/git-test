@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variables 品牌色彩區塊</title>
+
+    <style>
+        /* ==================================================
+           CSS VARIABLES：品牌色彩中央管理區
+           未來只需要修改這裡，就能快速更換整個網站的色彩
+           ================================================== */
+        :root {
+            --brand-primary: #4149bd;
+            --text-dark: #35a3be;
+            --bg-soft: #eceeee;
+        }
+
+        /* ==================================================
+           基礎樣式
+           ================================================== */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family:
+                "Noto Sans TC",
+                "Microsoft JhengHei",
+                Arial,
+                sans-serif;
+
+            background-color: var(--bg-soft);
+            color: var(--text-dark);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==================================================
+           主要內容區塊
+           ================================================== */
+        .content-section {
+            width: min(90%, 720px);
+            padding: 64px 40px;
+            background-color: var(--bg-soft);
+            text-align: center;
+        }
+
+        /* ==================================================
+           標題
+           ================================================== */
+        .content-title {
+            margin: 0 0 20px;
+            color: var(--text-dark);
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* ==================================================
+           內文
+           ================================================== */
+        .content-text {
+            margin: 0 auto 32px;
+            max-width: 600px;
+            color: var(--text-dark);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* ==================================================
+           按鈕
+           ================================================== */
+        .content-button {
+            display: inline-block;
+            padding: 14px 30px;
+            border: 2px solid var(--brand-primary);
+            border-radius: 8px;
+
+            background-color: var(--brand-primary);
+            color: var(--bg-soft);
+
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+
+            cursor: pointer;
+            transition:
+                transform 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+        /* ==================================================
+           按鈕 Hover
+           ================================================== */
+        .content-button:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+
+        /* ==================================================
+           按鈕 Focus
+           ================================================== */
+        .content-button:focus-visible {
+            outline: 3px solid var(--brand-primary);
+            outline-offset: 4px;
+        }
+
+        /* ==================================================
+           RWD：手機版
+           ================================================== */
+        @media (max-width: 600px) {
+            .content-section {
+                width: 100%;
+                padding: 48px 24px;
+            }
+
+            .content-text {
+                font-size: 16px;
+            }
+
+            .content-button {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================================================
+         主要內容區塊
+         ================================================== -->
+    <main class="content-section">
+
+        <!-- 標題 -->
+        <h1 class="content-title">
+            打造屬於你的品牌體驗
+        </h1>
+
+        <!-- 內文 -->
+        <p class="content-text">
+            使用 CSS 原生 Variables 統一管理品牌色彩。
+            未來只需要修改 :root 中的變數，就能快速切換整個網站的品牌色系，
+            讓網站維護更加簡單、清晰且有效率。
+        </p>
+
+        <!-- 按鈕 -->
+        <a href="#" class="content-button">
+            立即開始
+        </a>
+
+    </main>
+
+</body>
+</html>

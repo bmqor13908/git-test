@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox 水平排列範例</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        p {
+            margin-bottom: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+        /* Flexbox 容器 */
+        .flex-container {
+            display: flex;
+            flex-direction: row;            /* 主軸為水平方向 */
+            justify-content: space-around;  /* 元素平均分配並留有空隙 */
+            align-items: center;            /* 交叉軸垂直居中 */
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        /* Flexbox 子元素 */
+        .flex-item {
+            background-color: #4f46e5;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .flex-item:hover {
+            background-color: #4338ca;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Flexbox 水平排列範例</h1>
+    <p>使用了 flex-direction: row; 讓 5 個元素依主軸水平排列</p>
+
+    <!-- Flex 容器 -->
+    <div class="flex-container">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+        <div class="flex-item">4</div>
+        <div class="flex-item">5</div>
+    </div>
+
+</body>
+</html>
