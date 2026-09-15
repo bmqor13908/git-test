@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="黑色精密醫療科技風近視矯正手術資訊落地頁">
+<title>BLACK ARC｜精密視力矯正</title>
+<style>
+/* CSS:GLOBAL-START */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#020304;color:#e8edf0;font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.site-container{width:min(1180px,calc(100% - 40px));margin:auto}
+.section{position:relative;overflow:hidden;padding:115px 0;border-top:1px solid rgba(255,255,255,.07)}
+.section-label{color:#89949d;font-size:.68rem;font-weight:900;letter-spacing:.2em}
+.section-title{margin:10px 0 16px;font-size:clamp(2rem,4.5vw,4rem);line-height:1.05;letter-spacing:-.05em;color:#fff}
+.section-description{max-width:720px;color:#7f8992;line-height:1.9}
+.grid-bg{position:absolute;inset:0;opacity:.13;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.is-visible{opacity:1;transform:none}
+/* CSS:GLOBAL-END */
+
+/* CSS:NAV-START */
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:50;height:72px;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(2,3,4,.86);backdrop-filter:blur(14px)}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:950;letter-spacing:.16em;color:#fff}
+.brand span{display:block;color:#657078;font-size:.52rem;letter-spacing:.2em;margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:26px}
+.nav-link{color:#7f8991;font-size:.66rem;font-weight:900;letter-spacing:.12em;transition:.2s}
+.nav-link:hover{color:#fff}
+.nav-toggle{display:none;border:1px solid #39434a;background:#090b0d;color:#dce3e7;padding:10px 12px;border-radius:6px}
+@media(max-width:760px){
+  .nav-toggle{display:block}
+  .nav-links{position:absolute;top:72px;left:14px;right:14px;display:none;flex-direction:column;align-items:stretch;gap:0;padding:8px;border:1px solid #252d33;border-radius:10px;background:#080a0c}
+  .nav-links.is-open{display:flex}
+  .nav-link{padding:15px 12px;border-bottom:1px solid #171d21}
+  .nav-link:last-child{border-bottom:0}
+}
+/* CSS:NAV-END */
+
+/* CSS:HERO-START */
+.hero-section{position:relative;min-height:100vh;padding:150px 0 90px;display:grid;align-items:center;overflow:hidden;background:
+radial-gradient(circle at 70% 48%,rgba(220,228,232,.08),transparent 26%),#020304}
+.hero-section:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:55px 55px;opacity:.55}
+.hero-layout{position:relative;z-index:2;display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center}
+.hero-copy{max-width:620px}
+.hero-kicker{display:flex;align-items:center;gap:10px;color:#8d989f;font-size:.65rem;font-weight:900;letter-spacing:.2em}
+.hero-kicker:before{content:"";width:28px;height:1px;background:#cbd4d9;box-shadow:0 0 12px rgba(255,255,255,.4)}
+.hero-title{margin:18px 0 22px;color:#fff;font-size:clamp(3.2rem,7vw,6.6rem);line-height:.96;letter-spacing:-.07em}
+.hero-title em{font-style:normal;color:#aeb8be}
+.hero-description{max-width:590px;color:#87929a;line-height:1.95}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.primary-btn,.ghost-btn{padding:15px 20px;border-radius:7px;font-size:.68rem;font-weight:950;letter-spacing:.14em}
+.primary-btn{border:1px solid #e0e6e9;background:#e5eaed;color:#080a0c}
+.primary-btn:hover{background:#fff}
+.ghost-btn{border:1px solid #3a444b;background:#090b0d;color:#d7dfe3}
+.ghost-btn:hover{border-color:#69757d}
+.hero-machine{position:relative;min-height:540px;display:grid;place-items:center}
+.machine-body{position:relative;width:min(440px,78vw);height:360px;border:1px solid #4a555c;border-radius:28px 28px 70px 70px;background:linear-gradient(145deg,#14181b,#050607 65%);box-shadow:0 30px 100px rgba(0,0,0,.65),inset 0 0 45px rgba(255,255,255,.035);transform:perspective(900px) rotateY(-8deg)}
+.machine-body:before{content:"";position:absolute;left:-88px;top:55px;width:145px;height:30px;border:1px solid #525e65;border-right:0;border-radius:20px 0 0 20px;background:#0c0f11;transform:rotate(-8deg)}
+.machine-body:after{content:"";position:absolute;left:-120px;top:74px;width:65px;height:22px;border:1px solid #707a80;border-radius:20px;background:#0a0d0f}
+.machine-lens{position:absolute;left:50%;top:46%;width:132px;height:132px;transform:translate(-50%,-50%);border:1px solid #b9c2c7;border-radius:50%;box-shadow:0 0 35px rgba(255,255,255,.13),inset 0 0 30px rgba(255,255,255,.08)}
+.machine-lens:before{content:"";position:absolute;inset:22px;border:1px solid #59656d;border-radius:50%}
+.machine-lens:after{content:"";position:absolute;inset:43px;border:1px solid #b9c2c7;border-radius:50%;box-shadow:0 0 18px rgba(255,255,255,.18)}
+.machine-scan{position:absolute;left:50%;top:46%;width:155px;height:2px;transform:translate(-50%,-50%);background:#e5eaed;box-shadow:0 0 16px rgba(255,255,255,.7);animation:heroScan 2.4s ease-in-out infinite}
+.machine-hud{position:absolute;right:-50px;top:25px;width:150px;padding:14px;border:1px solid #323b41;background:rgba(4,6,7,.8);font-size:.57rem;letter-spacing:.12em;color:#6e7981}
+.machine-hud strong{display:block;color:#dce3e7;font-size:.72rem;margin:6px 0}
+.hud-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1d2428}
+.hud-row:last-child{border:0}
+.machine-orbit{position:absolute;width:400px;height:400px;border:1px solid rgba(190,200,206,.24);border-radius:50%;transform:scaleX(1.2);animation:orbit 14s linear infinite}
+.machine-orbit:before{content:"";position:absolute;inset:28px;border:1px dashed rgba(170,180,187,.18);border-radius:50%}
+.hero-status{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);color:#5f6a72;font-size:.58rem;letter-spacing:.18em;white-space:nowrap}
+@keyframes heroScan{0%,100%{opacity:.2;transform:translate(-50%,-80px)}50%{opacity:1;transform:translate(-50%,80px)}}
+@keyframes orbit{to{transform:scaleX(1.2) rotate(360deg)}}
+@media(max-width:850px){.hero-layout{grid-template-columns:1fr}.hero-copy{margin:auto}.hero-machine{min-height:440px}.machine-hud{right:0}}
+@media(max-width:600px){.site-container{width:min(100% - 28px,1180px)}.hero-section{padding-top:125px}.hero-machine{min-height:370px;transform:scale(.82)}.machine-body{width:390px}.hero-status{bottom:-2px}}
+/* CSS:HERO-END */
+
+/* CSS:ABOUT-START */
+.about-section{background:#050607}
+.about-layout{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}
+.eye-console{position:relative;min-height:470px;border:1px solid #293138;border-radius:16px;background:#07090b;display:grid;place-items:center;overflow:hidden}
+.eye-console:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:35px 35px}
+.eye-orbit{position:absolute;width:300px;height:300px;border:1px solid #515d64;border-radius:50%;transform:scaleX(1.25);animation:orbit 18s linear infinite}
+.eye-orbit:before,.eye-orbit:after{content:"";position:absolute;border:1px solid #343e44;border-radius:50%}
+.eye-orbit:before{inset:25px}.eye-orbit:after{inset:62px}
+.eye-core{position:relative;width:135px;height:135px;border-radius:50%;border:1px solid #c2cbd0;box-shadow:0 0 50px rgba(255,255,255,.08),inset 0 0 25px rgba(255,255,255,.06)}
+.eye-core:before{content:"";position:absolute;inset:25px;border:1px solid #707b82;border-radius:50%}
+.eye-core:after{content:"";position:absolute;inset:47px;border:1px solid #dce3e7;border-radius:50%;box-shadow:0 0 15px rgba(255,255,255,.2)}
+.eye-crosshair{position:absolute;width:360px;height:1px;background:linear-gradient(90deg,transparent,#8d989f,transparent)}
+.eye-crosshair:after{content:"";position:absolute;left:50%;top:-180px;width:1px;height:360px;background:linear-gradient(transparent,#8d989f,transparent)}
+.eye-scanline{position:absolute;width:315px;height:2px;background:#e5eaed;box-shadow:0 0 14px rgba(255,255,255,.55);animation:eyeScan 3s ease-in-out infinite}
+.analysis-tags{position:absolute;left:22px;bottom:20px;display:flex;gap:8px;flex-wrap:wrap}
+.analysis-tag{padding:7px 9px;border:1px solid #303a40;color:#68737b;font-size:.55rem;letter-spacing:.12em;background:#080a0c}
+.about-copy h2{margin:10px 0 20px;color:#fff;font-size:clamp(2rem,4vw,3.6rem);line-height:1.05;letter-spacing:-.05em}
+.about-copy p{color:#818c94;line-height:1.95}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}
+.flow-step{padding:14px;border:1px solid #252d33;background:#080a0c}
+.flow-step small{display:block;color:#5f6a72;font-size:.55rem;letter-spacing:.12em}
+.flow-step strong{display:block;margin-top:7px;color:#dce3e7;font-size:.7rem}
+@keyframes eyeScan{0%,100%{transform:translateY(-115px);opacity:.15}50%{transform:translateY(115px);opacity:1}}
+@media(max-width:850px){.about-layout{grid-template-columns:1fr}.eye-console{min-height:400px}}
+@media(max-width:600px){.flow{grid-template-columns:1fr}.eye-orbit{transform:scale(.82)}}
+/* CSS:ABOUT-END */
+
+/* CSS:SKILLS-START */
+.skills-section{background:
+radial-gradient(circle at 72% 48%,rgba(210,220,225,.055),transparent 30%),#050607}
+.skills-console{position:relative;z-index:2;display:grid;grid-template-columns:.72fr 1.28fr;gap:18px;margin-top:46px}
+.skills-list{border:1px solid #252d33;background:#080a0c;border-radius:14px;padding:12px}
+.skill-item{width:100%;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:center;padding:18px 15px;color:#8d979f;background:transparent;border:1px solid transparent;border-radius:9px;text-align:left;transition:.25s ease}
+.skill-item:hover,.skill-item.is-active{background:#0c0f11;border-color:#3d474e;color:#fff}
+.skill-item.is-active{box-shadow:inset 3px 0 #cbd3d8}
+.skill-index{font-weight:900}.skill-name{font-weight:800}.skill-state{font-size:.6rem;letter-spacing:.13em;color:#626d75}
+.skill-item.is-active .skill-state{color:#d2d9dd}
+.analysis-panel{position:relative;min-height:445px;overflow:hidden;padding:28px;border:1px solid #30383e;border-radius:14px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.008)),#07090b}
+.analysis-panel:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:34px 34px}
+.analysis-top,.analysis-content{position:relative;z-index:2}
+.analysis-top{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;padding-bottom:20px;border-bottom:1px solid #252c31}
+.analysis-code{color:#657079;font-size:.62rem;letter-spacing:.16em}
+.analysis-status{display:flex;align-items:center;gap:8px;color:#aeb8be;font-size:.66rem;letter-spacing:.12em}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#dfe6e9;box-shadow:0 0 14px rgba(255,255,255,.55)}
+.analysis-content{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;padding-top:28px}
+.analysis-visual{min-height:285px;position:relative;display:grid;place-items:center}
+.analysis-orbit{position:absolute;width:230px;height:230px;border:1px solid #3e484f;border-radius:50%;transform:scaleX(1.25);animation:orbit 13s linear infinite}
+.analysis-orbit:before,.analysis-orbit:after{content:"";position:absolute;border:1px solid #69747c;border-radius:50%}
+.analysis-orbit:before{inset:24px}.analysis-orbit:after{inset:52px;border-color:#313a40}
+.analysis-core{position:relative;width:94px;height:94px;border-radius:50%;border:1px solid #aeb9c0;box-shadow:0 0 40px rgba(255,255,255,.12),inset 0 0 28px rgba(255,255,255,.05)}
+.analysis-core:before{content:"";position:absolute;inset:18px;border:1px solid #68737b;border-radius:50%}
+.analysis-crosshair{position:absolute;width:270px;height:1px;background:linear-gradient(90deg,transparent,#cbd4d9,transparent)}
+.analysis-crosshair:after{content:"";position:absolute;width:1px;height:270px;left:50%;top:-134px;background:linear-gradient(transparent,#cbd4d9,transparent)}
+.analysis-scanline{position:absolute;width:245px;height:2px;background:#e7ecef;box-shadow:0 0 14px rgba(255,255,255,.55);animation:scan 2.7s ease-in-out infinite}
+.analysis-metrics{display:grid;gap:12px}
+.metric{padding:14px;border:1px solid #252d33;background:rgba(255,255,255,.02)}
+.metric-head{display:flex;justify-content:space-between;color:#68737b;font-size:.62rem;letter-spacing:.13em}
+.metric-value{margin-top:8px;color:#e4e9ec;font-size:1.05rem;font-weight:900}
+.analysis-title{margin:0;color:#fff;font-size:1.5rem}.analysis-copy{color:#818b94;line-height:1.85}
+.progress-wrap{margin-top:18px}.progress-label{display:flex;justify-content:space-between;color:#6d7880;font-size:.62rem;letter-spacing:.12em}
+.progress{height:5px;margin-top:8px;background:#1a2024;overflow:hidden}.progress-bar{height:100%;width:82%;background:#dbe2e6;transition:width .5s ease}
+.skills-disclaimer{position:relative;z-index:2;margin-top:18px;padding:15px 17px;border-left:2px solid #657078;color:#707b84;background:rgba(255,255,255,.018);font-size:.78rem;line-height:1.8}
+@keyframes scan{0%,100%{transform:translateY(-88px);opacity:.15}50%{transform:translateY(88px);opacity:1}}
+@media(max-width:850px){.skills-console{grid-template-columns:1fr}.analysis-content{grid-template-columns:1fr}.analysis-panel{min-height:650px}}
+@media(max-width:600px){.skill-item{grid-template-columns:40px 1fr auto;padding:16px 10px}}
+/* CSS:SKILLS-END */
+
+/* CSS:PROJECTS-START */
+.projects-section{background:#030405}
+.cases-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.case-card{position:relative;overflow:hidden;border:1px solid #252d33;border-radius:14px;background:linear-gradient(145deg,#0a0c0e,#050607);transition:.3s ease}
+.case-card:hover,.case-card.is-open{border-color:#66727a;box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.case-top{padding:24px 22px;border-bottom:1px solid #20272c}.case-number{color:#68737b;font-size:.62rem;letter-spacing:.16em}
+.case-title{margin:8px 0;color:#fff;font-size:1.35rem}.case-status{display:inline-flex;align-items:center;gap:7px;color:#aeb8be;font-size:.6rem;letter-spacing:.13em}
+.case-status:before{content:"";width:6px;height:6px;border-radius:50%;background:#dce3e6;box-shadow:0 0 12px rgba(255,255,255,.5)}
+.case-summary{padding:22px;color:#818b94;line-height:1.8;min-height:130px}
+.case-meta{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:0 22px 20px;background:#252d33;border:1px solid #252d33}
+.meta-cell{padding:12px;background:#07090b}.meta-label{display:block;color:#5f6a72;font-size:.57rem;letter-spacing:.13em}.meta-value{display:block;margin-top:5px;color:#d6dde1;font-size:.73rem;font-weight:800}
+.case-toggle{width:calc(100% - 44px);margin:0 22px 22px;padding:13px 14px;border:1px solid #3b454c;border-radius:7px;background:#0b0e10;color:#d8e0e4;font-size:.65rem;font-weight:900;letter-spacing:.13em}
+.case-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}.case-detail-inner{overflow:hidden}.case-card.is-open .case-detail{grid-template-rows:1fr}
+.case-detail-content{padding:0 22px 24px}.detail-console{padding:18px;border:1px solid #252d33;background:#07090b}
+.detail-heading{display:flex;justify-content:space-between;color:#9da8ae;font-size:.6rem;letter-spacing:.13em}.detail-scan{height:3px;margin:16px 0;background:#171c20;overflow:hidden}.detail-scan-bar{height:100%;width:0;background:#dfe5e8;box-shadow:0 0 12px rgba(255,255,255,.4)}.case-card.is-open .detail-scan-bar{width:100%;transition:width 1.2s ease}
+.detail-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}.detail-list li{display:grid;grid-template-columns:24px 1fr;gap:8px;color:#7e8991;font-size:.72rem;line-height:1.65}.detail-list li span:first-child{color:#cbd4d9;font-weight:900}
+.case-note{position:relative;z-index:2;margin-top:20px;padding:15px 17px;border-left:2px solid #657078;color:#707b84;background:rgba(255,255,255,.018);font-size:.76rem;line-height:1.8}
+@media(max-width:900px){.cases-grid{grid-template-columns:1fr 1fr}}@media(max-width:620px){.cases-grid{grid-template-columns:1fr}}
+/* CSS:PROJECTS-END */
+
+/* CSS:CONTACT-START */
+.contact-section{background:#050607}
+.contact-layout{position:relative;z-index:2;display:grid;grid-template-columns:.7fr 1.3fr;gap:18px;margin-top:48px}
+.intake-console{padding:28px;border:1px solid #293138;border-radius:14px;background:#080a0c}
+.intake-steps{display:grid;gap:10px;margin-top:30px}
+.intake-step{padding:15px;border:1px solid #20272c;background:#060809}.intake-step span{display:block;color:#5f6a72;font-size:.57rem;letter-spacing:.13em}.intake-step strong{display:block;margin-top:7px;color:#dce3e7;font-size:.72rem}
+.system-status{margin-top:26px;padding:14px;border:1px solid #2b343a;background:#060809;color:#88939b;font-size:.62rem;letter-spacing:.1em}.system-status b{color:#e2e8eb}
+.intake-form{padding:28px;border:1px solid #30383e;border-radius:14px;background:linear-gradient(145deg,#0b0d0f,#050607)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.form-field{display:grid;gap:7px}.form-field.full{grid-column:1/-1}
+.form-field label{color:#737e86;font-size:.61rem;font-weight:900;letter-spacing:.12em}
+.form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid #2b343a;border-radius:6px;background:#060809;color:#e4eaed;padding:13px;outline:none}
+.form-field textarea{min-height:120px;resize:vertical}.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:#89949b;box-shadow:0 0 0 2px rgba(255,255,255,.04)}
+.form-error{display:none;color:#c6cfd4;font-size:.6rem}.form-field.has-error input,.form-field.has-error select,.form-field.has-error textarea{border-color:#aab4b9}.form-field.has-error .form-error{display:block}
+.form-actions{display:flex;align-items:center;gap:14px;margin-top:20px}.submit-btn{border:1px solid #e0e6e9;background:#e5eaed;color:#080a0c;padding:14px 20px;border-radius:7px;font-size:.66rem;font-weight:950;letter-spacing:.13em}
+.form-message{display:none;padding:16px;border:1px solid #465159;background:#080b0d;color:#cfd8dc;line-height:1.7;font-size:.72rem}.form-message.is-visible{display:block}
+.form-note{color:#5f6a72;font-size:.6rem;line-height:1.7}
+@media(max-width:850px){.contact-layout{grid-template-columns:1fr}}@media(max-width:620px){.form-grid{grid-template-columns:1fr}.form-field.full{grid-column:auto}.form-actions{align-items:stretch;flex-direction:column}}
+/* CSS:CONTACT-END */
+
+/* CSS:FOOTER-START */
+.site-footer{padding:32px 0;border-top:1px solid #161c20;color:#5f6a72;font-size:.6rem;letter-spacing:.08em}
+.footer-inner{display:flex;justify-content:space-between;gap:20px}@media(max-width:600px){.footer-inner{flex-direction:column}}
+.back-top{position:fixed;right:22px;bottom:22px;z-index:40;display:none;width:42px;height:42px;border:1px solid #3d474e;border-radius:50%;background:#080a0c;color:#dce3e7}.back-top.is-visible{display:block}
+/* CSS:FOOTER-END */
+</style>
+</head>
+<body>
+
+<!-- SECTION:NAV-START -->
+<header class="site-nav">
+  <div class="site-container nav-inner">
+    <a class="brand" href="#hero">BLACK ARC<span>PRECISION VISION SYSTEM</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">MENU</button>
+    <nav class="nav-links" id="main-nav">
+      <a class="nav-link" href="#about">01 ABOUT</a>
+      <a class="nav-link" href="#skills">02 ANALYSIS</a>
+      <a class="nav-link" href="#projects">03 CASES</a>
+      <a class="nav-link" href="#contact">04 CONTACT</a>
+    </nav>
+  </div>
+</header>
+<!-- SECTION:NAV-END -->
+
+<!-- SECTION:HERO-START -->
+<section class="hero-section" id="hero">
+  <div class="site-container hero-layout">
+    <div class="hero-copy reveal">
+      <div class="hero-kicker">PRECISION REFRACTIVE SYSTEM / 2026</div>
+      <h1 class="hero-title">看清世界，<br><em>從精密開始。</em></h1>
+      <p class="hero-description">結合精密影像分析與現代屈光手術科技，在完整術前評估的基礎上，探索適合你的視力矯正方案。</p>
+      <div class="hero-actions">
+        <a class="primary-btn" href="#contact">預約術前評估</a>
+        <a class="ghost-btn" href="#about">了解分析流程</a>
+      </div>
+    </div>
+    <div class="hero-machine reveal" aria-label="精密眼科手術設備示意">
+      <div class="machine-orbit"></div>
+      <div class="machine-body">
+        <div class="machine-lens"></div>
+        <div class="machine-scan"></div>
+        <div class="machine-hud">
+          OPTICAL SYSTEM
+          <strong>ACTIVE SCAN</strong>
+          <div class="hud-row"><span>CORNEA</span><span>OK</span></div>
+          <div class="hud-row"><span>REFRACTION</span><span>SCAN</span></div>
+          <div class="hud-row"><span>PRECISION</span><span>98%</span></div>
+        </div>
+      </div>
+      <div class="hero-status">SYSTEM READY / OPTICAL SCAN / CLINICAL REVIEW</div>
+    </div>
+  </div>
+</section>
+<!-- SECTION:HERO-END -->
+
+<!-- SECTION:ABOUT-START -->
+<section class="section about-section" id="about">
+  <div class="grid-bg"></div>
+  <div class="site-container about-layout">
+    <div class="eye-console reveal">
+      <div class="eye-orbit"></div><div class="eye-crosshair"></div><div class="eye-scanline"></div><div class="eye-core"></div>
+      <div class="analysis-tags"><span class="analysis-tag">CORNEA MAP</span><span class="analysis-tag">REFRACTION</span><span class="analysis-tag">AXIAL LENGTH</span></div>
+    </div>
+    <div class="about-copy reveal">
+      <div class="section-label">PRE-OPERATIVE ANALYSIS</div>
+      <h2>每一雙眼睛，<br>都需要一套專屬參數。</h2>
+      <p>當眼球光學系統的屈光狀態與眼球結構產生差異，光線無法精準聚焦於視網膜，便可能形成近視。透過精密檢查，可以更完整了解個人的眼部條件。</p>
+      <p>以精密影像與現代手術設備輔助醫療判斷，讓每一次評估都有數據依據，再由醫師依檢查結果與個人需求討論適合的視力矯正方案。</p>
+      <div class="flow">
+        <div class="flow-step"><small>01</small><strong>SCAN</strong></div>
+        <div class="flow-step"><small>02</small><strong>ANALYZE</strong></div>
+        <div class="flow-step"><small>03</small><strong>PLAN</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- SECTION:ABOUT-END -->
+
+<!-- SECTION:SKILLS-START -->
+<section class="section skills-section" id="skills">
+  <div class="grid-bg"></div>
+  <div class="site-container">
+    <div class="reveal">
+      <div class="section-label">POST-OPERATIVE OUTCOME MONITOR</div>
+      <h2 class="section-title">術後可能效果分析</h2>
+      <p class="section-description">以醫療資訊面板呈現常見的評估方向。實際結果會依個人眼睛條件、手術方式與術後恢復而不同，以下內容不代表個別療效保證。</p>
+    </div>
+    <div class="skills-console reveal">
+      <div class="skills-list" role="tablist" aria-label="術後可能效果">
+        <button class="skill-item is-active" type="button" data-skill="vision" role="tab" aria-selected="true"><span class="skill-index">01</span><span class="skill-name">視力矯正目標</span><span class="skill-state">READY</span></button>
+        <button class="skill-item" type="button" data-skill="glasses" role="tab" aria-selected="false"><span class="skill-index">02</span><span class="skill-name">降低眼鏡依賴</span><span class="skill-state">SCAN</span></button>
+        <button class="skill-item" type="button" data-skill="quality" role="tab" aria-selected="false"><span class="skill-index">03</span><span class="skill-name">視覺品質</span><span class="skill-state">SCAN</span></button>
+        <button class="skill-item" type="button" data-skill="lifestyle" role="tab" aria-selected="false"><span class="skill-index">04</span><span class="skill-name">生活便利性</span><span class="skill-state">SCAN</span></button>
+        <button class="skill-item" type="button" data-skill="followup" role="tab" aria-selected="false"><span class="skill-index">05</span><span class="skill-name">術後追蹤</span><span class="skill-state">SCAN</span></button>
+      </div>
+      <div class="analysis-panel">
+        <div class="analysis-top"><div><div class="analysis-code">ANALYSIS NODE / REFRACTIVE-05</div><h3 class="analysis-title" data-analysis-title>視力矯正目標</h3></div><div class="analysis-status"><span class="status-dot"></span><span data-analysis-status>READY</span></div></div>
+        <div class="analysis-content">
+          <div class="analysis-visual" aria-hidden="true"><div class="analysis-orbit"></div><div class="analysis-crosshair"></div><div class="analysis-scanline"></div><div class="analysis-core"></div></div>
+          <div>
+            <p class="analysis-copy" data-analysis-copy>依照術前檢查結果與個人需求，與醫師討論合理的視力矯正目標。</p>
+            <div class="analysis-metrics"><div class="metric"><div class="metric-head"><span>PARAMETER</span><span>01</span></div><div class="metric-value" data-metric-one>INDIVIDUAL</div></div><div class="metric"><div class="metric-head"><span>ASSESSMENT</span><span>02</span></div><div class="metric-value" data-metric-two>PHYSICIAN REVIEW</div></div></div>
+            <div class="progress-wrap"><div class="progress-label"><span>ANALYSIS STATUS</span><span data-progress-value>82%</span></div><div class="progress"><div class="progress-bar" data-progress-bar></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="skills-disclaimer">醫療提醒：近視矯正手術是否適合，需由合格眼科醫師進行完整檢查與專業評估。網站內容僅供衛教與介面展示，不取代醫療診斷或醫師建議。</div>
+  </div>
+</section>
+<!-- SECTION:SKILLS-END -->
+
+<!-- SECTION:PROJECTS-START -->
+<section class="section projects-section" id="projects">
+  <div class="grid-bg"></div>
+  <div class="site-container">
+    <div class="reveal"><div class="section-label">CLINICAL CASE ARCHIVE</div><h2 class="section-title">案例分析</h2><p class="section-description">以下為網站介面展示用的示意案例，透過不同生活需求呈現術前評估的思考方向；不代表真實患者紀錄，也不代表任何特定手術結果。</p></div>
+    <div class="cases-grid reveal">
+      <article class="case-card" data-case="01"><div class="case-top"><div class="case-number">CASE-01 / HIGH MYOPIA</div><h3 class="case-title">高度近視評估</h3><div class="case-status">COMPLETE</div></div><div class="case-summary">以降低日常眼鏡依賴為需求核心，從屈光狀態與眼部條件開始進行完整術前評估。</div><div class="case-meta"><div class="meta-cell"><span class="meta-label">LIFESTYLE</span><span class="meta-value">DAILY</span></div><div class="meta-cell"><span class="meta-label">REVIEW</span><span class="meta-value">CLINICAL</span></div></div><button class="case-toggle" type="button" aria-expanded="false">VIEW ANALYSIS</button><div class="case-detail"><div class="case-detail-inner"><div class="case-detail-content"><div class="detail-console"><div class="detail-heading"><span>PRE-OPERATIVE ANALYSIS</span><span>01</span></div><div class="detail-scan"><div class="detail-scan-bar"></div></div><ul class="detail-list"><li><span>01</span><span>確認目前屈光狀態與視力需求。</span></li><li><span>02</span><span>評估角膜及其他眼部條件。</span></li><li><span>03</span><span>由醫師討論適合的矯正選項與預期目標。</span></li></ul></div></div></div></div></article>
+      <article class="case-card" data-case="02"><div class="case-top"><div class="case-number">CASE-02 / DIGITAL LIFESTYLE</div><h3 class="case-title">長時間用眼族</h3><div class="case-status">REVIEWED</div></div><div class="case-summary">以工作與日常生活便利性為重點，將長時間使用數位設備的生活型態納入諮詢內容。</div><div class="case-meta"><div class="meta-cell"><span class="meta-label">LIFESTYLE</span><span class="meta-value">DIGITAL</span></div><div class="meta-cell"><span class="meta-label">REVIEW</span><span class="meta-value">OPTICAL</span></div></div><button class="case-toggle" type="button" aria-expanded="false">VIEW ANALYSIS</button><div class="case-detail"><div class="case-detail-inner"><div class="case-detail-content"><div class="detail-console"><div class="detail-heading"><span>PRE-OPERATIVE ANALYSIS</span><span>02</span></div><div class="detail-scan"><div class="detail-scan-bar"></div></div><ul class="detail-list"><li><span>01</span><span>了解工作距離、用眼習慣與日常需求。</span></li><li><span>02</span><span>評估屈光狀態與眼部健康條件。</span></li><li><span>03</span><span>將生活型態與醫師專業判斷一起納入方案討論。</span></li></ul></div></div></div></div></article>
+      <article class="case-card" data-case="03"><div class="case-top"><div class="case-number">CASE-03 / ACTIVE LIFESTYLE</div><h3 class="case-title">運動族</h3><div class="case-status">ASSESSED</div></div><div class="case-summary">以運動時的視覺便利性為需求，從生活習慣、眼部條件與可行的矯正方式進行評估。</div><div class="case-meta"><div class="meta-cell"><span class="meta-label">LIFESTYLE</span><span class="meta-value">ACTIVE</span></div><div class="meta-cell"><span class="meta-label">REVIEW</span><span class="meta-value">INDIVIDUAL</span></div></div><button class="case-toggle" type="button" aria-expanded="false">VIEW ANALYSIS</button><div class="case-detail"><div class="case-detail-inner"><div class="case-detail-content"><div class="detail-console"><div class="detail-heading"><span>PRE-OPERATIVE ANALYSIS</span><span>03</span></div><div class="detail-scan"><div class="detail-scan-bar"></div></div><ul class="detail-list"><li><span>01</span><span>了解運動種類與日常活動需求。</span></li><li><span>02</span><span>確認眼部條件與醫師認為需要注意的因素。</span></li><li><span>03</span><span>依檢查結果討論合適的視力矯正選項。</span></li></ul></div></div></div></div></article>
+    </div>
+    <div class="case-note">案例為示意內容。是否適合近視矯正手術、採用何種方式，以及可期待的視覺結果，都需要由眼科醫師依完整檢查與個人條件判斷。</div>
+  </div>
+</section>
+<!-- SECTION:PROJECTS-END -->
+
+<!-- SECTION:CONTACT-START -->
+<section class="section contact-section" id="contact">
+  <div class="grid-bg"></div>
+  <div class="site-container">
+    <div class="reveal"><div class="section-label">PATIENT INTAKE / PRE-OPERATIVE CONSULTATION</div><h2 class="section-title">預約術前評估</h2><p class="section-description">留下基本資訊與需求，方便醫療團隊進一步與你確認適合的諮詢方式與時間。</p></div>
+    <div class="contact-layout reveal">
+      <aside class="intake-console">
+        <div class="section-label">SYSTEM STATUS</div>
+        <div class="system-status"><b>● ACCEPTING REQUESTS</b><br><br>PRE-OPERATIVE CONSULTATION NODE / ONLINE</div>
+        <div class="intake-steps">
+          <div class="intake-step"><span>01 / PATIENT DATA</span><strong>基本聯絡資訊</strong></div>
+          <div class="intake-step"><span>02 / VISION STATUS</span><strong>目前視力狀況</strong></div>
+          <div class="intake-step"><span>03 / CONSULTATION</span><strong>需求與時段</strong></div>
+          <div class="intake-step"><span>04 / CONFIRMATION</span><strong>團隊後續聯繫</strong></div>
+        </div>
+      </aside>
+      <form class="intake-form" novalidate>
+        <div class="form-grid">
+          <div class="form-field"><label for="patient-name">姓名 *</label><input id="patient-name" name="name" type="text" autocomplete="name"><span class="form-error">請填寫姓名。</span></div>
+          <div class="form-field"><label for="patient-contact">LINE／聯絡方式 *</label><input id="patient-contact" name="contact" type="text"><span class="form-error">請填寫聯絡方式。</span></div>
+          <div class="form-field"><label for="patient-email">EMAIL *</label><input id="patient-email" name="email" type="email" autocomplete="email"><span class="form-error">請輸入有效 Email。</span></div>
+          <div class="form-field"><label for="patient-vision">目前近視度數／視力狀況</label><input id="patient-vision" name="vision" type="text" placeholder="例如：近視約 500 度"></div>
+          <div class="form-field full"><label for="patient-goal">主要需求 *</label><select id="patient-goal" name="goal"><option value="">請選擇</option><option>降低日常眼鏡依賴</option><option>運動與生活便利性</option><option>工作／數位生活需求</option><option>想了解適合自己的方案</option></select><span class="form-error">請選擇主要需求。</span></div>
+          <div class="form-field full"><label for="patient-problem">想改善的問題</label><textarea id="patient-problem" name="problem" placeholder="請描述目前最在意的視力或生活需求"></textarea></div>
+          <div class="form-field full"><label for="patient-time">希望的諮詢時段 *</label><select id="patient-time" name="time"><option value="">請選擇</option><option>平日上午</option><option>平日下午</option><option>平日晚間</option><option>週末</option></select><span class="form-error">請選擇諮詢時段。</span></div>
+        </div>
+        <div class="form-actions"><button class="submit-btn" type="submit">SUBMIT REQUEST</button><div class="form-note">送出資料僅作為諮詢聯繫用途；實際醫療安排與適應性仍需由醫療團隊確認。</div></div>
+        <div class="form-message" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+<!-- SECTION:CONTACT-END -->
+
+<!-- SECTION:FOOTER-START -->
+<footer class="site-footer">
+  <div class="site-container footer-inner"><span>BLACK ARC / PRECISION VISION SYSTEM</span><span>資訊僅供衛教與網站展示，實際醫療決策請諮詢合格眼科醫師。</span></div>
+</footer>
+<button class="back-top" type="button" aria-label="回到頂部">↑</button>
+<!-- SECTION:FOOTER-END -->
+
+<script>
+/* JS:NAV-START */
+const navToggle=document.querySelector(".nav-toggle");
+const navLinks=document.querySelector(".nav-links");
+navToggle.addEventListener("click",()=>{const open=navLinks.classList.toggle("is-open");navToggle.setAttribute("aria-expanded",String(open));});
+document.querySelectorAll(".nav-link").forEach(link=>link.addEventListener("click",()=>{navLinks.classList.remove("is-open");navToggle.setAttribute("aria-expanded","false");}));
+/* JS:NAV-END */
+
+/* JS:HERO-START */
+document.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener("click",(event)=>{const target=document.querySelector(link.getAttribute("href"));if(target){event.preventDefault();target.scrollIntoView({behavior:"smooth",block:"start"});}}));
+/* JS:HERO-END */
+
+/* JS:ABOUT-START */
+/* ABOUT animations are CSS-driven; this slot is reserved for future analysis controls. */
+/* JS:ABOUT-END */
+
+/* JS:SKILLS-START */
+const skillData={
+ vision:{title:"視力矯正目標",status:"READY",copy:"依照術前檢查結果與個人需求，與醫師討論合理的視力矯正目標。",one:"INDIVIDUAL",two:"PHYSICIAN REVIEW",progress:82},
+ glasses:{title:"降低眼鏡依賴",status:"ASSESSED",copy:"部分符合條件的患者，術後日常生活中可能降低對眼鏡或隱形眼鏡的依賴。",one:"LIFESTYLE",two:"CASE DEPENDENT",progress:76},
+ quality:{title:"視覺品質",status:"ASSESSED",copy:"視覺品質受到個人眼部條件與手術方式等因素影響，實際狀況需要專業評估。",one:"OPTICAL DATA",two:"CASE DEPENDENT",progress:71},
+ lifestyle:{title:"生活便利性",status:"ASSESSED",copy:"對部分患者而言，運動、旅行與日常活動可能更加便利，但仍需考量個人需求。",one:"DAILY USE",two:"INDIVIDUAL",progress:68},
+ followup:{title:"術後追蹤",status:"MONITOR",copy:"術後依醫療團隊安排進行追蹤與照護，持續了解恢復狀況與後續需求。",one:"FOLLOW-UP",two:"CLINICAL CARE",progress:91}
+};
+const skillItems=document.querySelectorAll(".skill-item");
+const analysisTitle=document.querySelector("[data-analysis-title]");
+const analysisStatus=document.querySelector("[data-analysis-status]");
+const analysisCopy=document.querySelector("[data-analysis-copy]");
+const metricOne=document.querySelector("[data-metric-one]");
+const metricTwo=document.querySelector("[data-metric-two]");
+const progressValue=document.querySelector("[data-progress-value]");
+const progressBar=document.querySelector("[data-progress-bar]");
+function updateSkill(key){
+ const data=skillData[key]; if(!data)return;
+ skillItems.forEach(item=>{const active=item.dataset.skill===key;item.classList.toggle("is-active",active);item.setAttribute("aria-selected",String(active));item.querySelector(".skill-state").textContent=active?"READY":"SCAN";});
+ analysisStatus.textContent="ANALYZING...";progressBar.style.width="24%";
+ window.setTimeout(()=>{analysisTitle.textContent=data.title;analysisCopy.textContent=data.copy;metricOne.textContent=data.one;metricTwo.textContent=data.two;progressValue.textContent=data.progress+"%";progressBar.style.width=data.progress+"%";analysisStatus.textContent=data.status;},320);
+}
+skillItems.forEach(item=>item.addEventListener("click",()=>updateSkill(item.dataset.skill)));
+/* JS:SKILLS-END */
+
+/* JS:PROJECTS-START */
+document.querySelectorAll(".case-card").forEach(card=>{
+ const toggle=card.querySelector(".case-toggle");
+ toggle.addEventListener("click",()=>{const open=card.classList.toggle("is-open");toggle.setAttribute("aria-expanded",String(open));toggle.textContent=open?"CLOSE ANALYSIS":"VIEW ANALYSIS";});
+});
+/* JS:PROJECTS-END */
+
+/* JS:CONTACT-START */
+const form=document.querySelector(".intake-form");
+const formMessage=document.querySelector(".form-message");
+const requiredFields=["patient-name","patient-contact","patient-email","patient-goal","patient-time"];
+function validateField(field){
+ const wrapper=field.closest(".form-field");
+ let valid=field.value.trim()!=="";
+ if(field.type==="email"&&valid){valid=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());}
+ wrapper.classList.toggle("has-error",!valid);
+ return valid;
+}
+requiredFields.forEach(id=>{const field=document.getElementById(id);field.addEventListener("blur",()=>validateField(field));field.addEventListener("input",()=>{if(field.closest(".form-field").classList.contains("has-error"))validateField(field);});});
+form.addEventListener("submit",(event)=>{
+ event.preventDefault();
+ const valid=requiredFields.map(id=>validateField(document.getElementById(id))).every(Boolean);
+ if(!valid){formMessage.classList.add("is-visible");formMessage.textContent="請先完成標示為必填的欄位。";return;}
+ const button=form.querySelector(".submit-btn");
+ button.disabled=true;button.textContent="PROCESSING...";
+ formMessage.classList.remove("is-visible");
+ window.setTimeout(()=>{form.reset();button.disabled=false;button.textContent="SUBMIT REQUEST";formMessage.textContent="REQUEST RECEIVED｜已收到你的術前評估需求，後續將由醫療團隊與你確認相關資訊。";formMessage.classList.add("is-visible");},700);
+});
+/* JS:CONTACT-END */
+
+/* JS:GLOBAL-START */
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add("is-visible");}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+const backTop=document.querySelector(".back-top");
+window.addEventListener("scroll",()=>backTop.classList.toggle("is-visible",window.scrollY>600),{passive:true});
+backTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+/* JS:GLOBAL-END */
+</script>
+</body>
+</html>

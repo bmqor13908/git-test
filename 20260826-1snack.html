@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="精選台灣傳統零食商品列表"
+    >
+    <title>台灣傳統零食｜商品列表</title>
+
+    <style>
+        /* ================================
+           BASE
+        ================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family:
+                "Noto Sans TC",
+                "PingFang TC",
+                "Microsoft JhengHei",
+                sans-serif;
+            background: #f6f1e8;
+            color: #3c2a20;
+            line-height: 1.6;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* ================================
+           PRODUCT SECTION
+        ================================= */
+
+        .product-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        /* ================================
+           PRODUCT CARD
+        ================================= */
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+
+            overflow: hidden;
+
+            background: #fffaf2;
+            border: 1px solid #e6d6c2;
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 24px rgba(74, 48, 31, 0.08);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 16px 32px rgba(74, 48, 31, 0.14);
+        }
+
+        /* ================================
+           PRODUCT IMAGE
+        ================================= */
+
+        .product-image {
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            background: #e8dccb;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        /* ================================
+           PRODUCT CONTENT
+        ================================= */
+
+        .product-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+
+            padding: 24px;
+        }
+
+        .product-category {
+            margin-bottom: 8px;
+
+            color: #a66a38;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .product-title {
+            margin-bottom: 10px;
+
+            color: #3c2a20;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .product-description {
+            margin-bottom: 20px;
+
+            color: #735f51;
+            font-size: 15px;
+        }
+
+        /* ================================
+           PRODUCT FOOTER
+        ================================= */
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-top: auto;
+            padding-top: 18px;
+
+            border-top: 1px solid #eadfd2;
+        }
+
+        .product-price {
+            color: #9a5428;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .product-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 10px 18px;
+
+            color: #ffffff;
+            background: #7c4b2a;
+
+            border: 0;
+            border-radius: 999px;
+
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .product-button:hover {
+            background: #5f371f;
+            transform: translateY(-2px);
+        }
+
+        .product-button:focus-visible {
+            outline: 3px solid #d6a56e;
+            outline-offset: 3px;
+        }
+
+        /* ================================
+           TABLET
+        ================================= */
+
+        @media (max-width: 900px) {
+            .product-section {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 600px) {
+            .product-section {
+                grid-template-columns: 1fr;
+                padding: 48px 20px;
+            }
+
+            .product-content {
+                padding: 20px;
+            }
+
+            .product-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PRODUCT-LIST-START -->
+    <section class="product-section" aria-label="傳統零食商品列表">
+
+        <!-- PRODUCT-01 -->
+        <article class="product-card">
+
+            <div class="product-image">
+                <img
+                    src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=800&q=80"
+                    alt="花生糖傳統零食"
+                >
+            </div>
+
+            <div class="product-content">
+
+                <span class="product-category">
+                    經典古早味
+                </span>
+
+                <h2 class="product-title">
+                    古早味花生糖
+                </h2>
+
+                <p class="product-description">
+                    嚴選香脆花生與傳統糖衣製作，
+                    保留樸實又熟悉的古早味口感。
+                </p>
+
+                <div class="product-footer">
+                    <span class="product-price">
+                        NT$180
+                    </span>
+
+                    <button class="product-button" type="button">
+                        查看商品
+                    </button>
+                </div>
+
+            </div>
+        </article>
+
+
+        <!-- PRODUCT-02 -->
+        <article class="product-card">
+
+            <div class="product-image">
+                <img
+                    src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&w=800&q=80"
+                    alt="芝麻糖傳統零食"
+                >
+            </div>
+
+            <div class="product-content">
+
+                <span class="product-category">
+                    手工製作
+                </span>
+
+                <h2 class="product-title">
+                    黑芝麻香糖
+                </h2>
+
+                <p class="product-description">
+                    濃郁黑芝麻搭配細緻糖香，
+                    每一口都能感受傳統手工零食的魅力。
+                </p>
+
+                <div class="product-footer">
+                    <span class="product-price">
+                        NT$160
+                    </span>
+
+                    <button class="product-button" type="button">
+                        查看商品
+                    </button>
+                </div>
+
+            </div>
+        </article>
+
+
+        <!-- PRODUCT-03 -->
+        <article class="product-card">
+
+            <div class="product-image">
+                <img
+                    src="https://images.unsplash.com/photo-1599599810694-b5acfd8e8a2f?auto=format&fit=crop&w=800&q=80"
+                    alt="米香傳統零食"
+                >
+            </div>
+
+            <div class="product-content">
+
+                <span class="product-category">
+                    台灣米香
+                </span>
+
+                <h2 class="product-title">
+                    傳統爆米香
+                </h2>
+
+                <p class="product-description">
+                    精選台灣米粒製成酥脆米香，
+                    搭配淡淡麥芽糖香氣，簡單卻令人回味。
+                </p>
+
+                <div class="product-footer">
+                    <span class="product-price">
+                        NT$150
+                    </span>
+
+                    <button class="product-button" type="button">
+                        查看商品
+                    </button>
+                </div>
+
+            </div>
+        </article>
+
+
+        <!-- PRODUCT-04 -->
+        <article class="product-card">
+
+            <div class="product-image">
+                <img
+                    src="https://images.unsplash.com/photo-1621939514649-280e2aa7a64f?auto=format&fit=crop&w=800&q=80"
+                    alt="鳳梨酥傳統點心"
+                >
+            </div>
+
+            <div class="product-content">
+
+                <span class="product-category">
+                    台灣名點
+                </span>
+
+                <h2 class="product-title">
+                    手作鳳梨酥
+                </h2>
+
+                <p class="product-description">
+                    酸甜鳳梨內餡搭配細緻酥皮，
+                    是台灣人熟悉的經典伴手禮。
+                </p>
+
+                <div class="product-footer">
+                    <span class="product-price">
+                        NT$280
+                    </span>
+
+                    <button class="product-button" type="button">
+                        查看商品
+                    </button>
+                </div>
+
+            </div>
+        </article>
+
+
+        <!-- PRODUCT-05 -->
+        <article class="product-card">
+
+            <div class="product-image">
+                <img
+                    src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=800&q=80"
+                    alt="牛軋糖傳統零食"
+                >
+            </div>
+
+            <div class="product-content">
+
+                <span class="product-category">
+                    手工甜點
+                </span>
+
+                <h2 class="product-title">
+                    綜合堅果牛軋糖
+                </h2>
+
+                <p class="product-description">
+                    精選堅果與柔韌牛軋糖融合，
+                    甜而不膩，帶有豐富的堅果香氣。
+                </p>
+
+                <div class="product-footer">
+                    <span class="product-price">
+                        NT$220
+                    </span>
+
+                    <button class="product-button" type="button">
+                        查看商品
+                    </button>
+                </div>
+
+            </div>
+        </article>
+
+
+        <!-- PRODUCT-06 -->
+        <article class="product-card">
+
+            <div class="product-image">
+                <img
+                    src="https://images.unsplash.com/photo-1607920592519-8b6a0c8e5e0c?auto=format&fit=crop&w=800&q=80"
+                    alt="綠豆糕傳統糕點"
+                >
+            </div>
+
+            <div class="product-content">
+
+                <span class="product-category">
+                    古早糕點
+                </span>
+
+                <h2 class="product-title">
+                    綠豆糕
+                </h2>
+
+                <p class="product-description">
+                    綿密細緻的綠豆香氣，
+                    搭配淡雅甜味，呈現傳統糕點的溫潤滋味。
+                </p>
+
+                <div class="product-footer">
+                    <span class="product-price">
+                        NT$190
+                    </span>
+
+                    <button class="product-button" type="button">
+                        查看商品
+                    </button>
+                </div>
+
+            </div>
+        </article>
+
+    </section>
+    <!-- PRODUCT-LIST-END -->
+
+</body>
+</html>
+```

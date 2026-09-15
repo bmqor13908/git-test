@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- 設定手機與平板的響應式 viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 網頁標題 -->
+    <title>TechGear｜電腦周邊商品</title>
+
+    <style>
+        /* ========================================
+           基礎重置
+           ======================================== */
+
+        /* 移除所有元素預設的 margin 與 padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 設定整個網頁的基本字體與背景 */
+        body {
+            font-family:
+                "Noto Sans TC",
+                "Microsoft JhengHei",
+                Arial,
+                sans-serif;
+
+            background: #f4f6f8;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+
+        /* ========================================
+           商品列表區塊
+           ======================================== */
+
+        /* 
+         * 最外層商品列表
+         * 使用標準 section 語義化標籤
+         * 並使用 CSS Grid 建立商品排列
+         */
+        .product-section {
+            display: grid;
+
+            /* 桌面版建立 3 個等寬欄位 */
+            grid-template-columns: repeat(3, 1fr);
+
+            /* Grid 格子之間固定使用 24px 間距 */
+            gap: 24px;
+
+            /* 限制內容最大寬度 */
+            max-width: 1200px;
+
+            /* 讓區塊在頁面中央 */
+            margin: 0 auto;
+
+            /* 區塊內部留白 */
+            padding: 60px 24px;
+        }
+
+
+        /* ========================================
+           商品卡片
+           ======================================== */
+
+        /*
+         * 每一個商品都使用 article
+         * article 本身就是獨立的商品內容區塊
+         */
+        .product-card {
+            /* 讓卡片成為垂直排列 */
+            display: flex;
+            flex-direction: column;
+
+            /* 白色商品卡片 */
+            background: #ffffff;
+
+            /* 圓角 */
+            border-radius: 16px;
+
+            /* 隱藏超出卡片的圖片內容 */
+            overflow: hidden;
+
+            /* 細緻邊框 */
+            border: 1px solid #e5e7eb;
+
+            /* 商品卡片陰影 */
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+
+            /* Hover 動畫時間 */
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        /* 
+         * 滑鼠移入商品卡片時
+         * 卡片向上移動一點並增加陰影
+         */
+        .product-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 16px 36px rgba(15, 23, 42, 0.12);
+        }
+
+
+        /* ========================================
+           商品圖片區域
+           ======================================== */
+
+        /*
+         * 商品圖片容器
+         * 這裡使用 CSS 製作視覺化商品展示區
+         */
+        .product-image {
+            position: relative;
+
+            /* 商品圖片展示區高度 */
+            min-height: 220px;
+
+            /* 使用 Flex 將商品圖示置中 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            /* 淡灰色背景 */
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8fafc,
+                    #e5e7eb
+                );
+        }
+
+
+        /* 商品圖片上的裝飾圓 */
+        .product-image::before {
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            border-radius: 50%;
+
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+
+        /* 商品圖示 */
+        .product-icon {
+            position: relative;
+            z-index: 1;
+
+            /* 使用 Flex 置中圖示 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 120px;
+            height: 120px;
+
+            border-radius: 24px;
+
+            background: #111827;
+
+            color: #ffffff;
+
+            font-size: 48px;
+
+            box-shadow:
+                0 12px 28px rgba(15, 23, 42, 0.2);
+        }
+
+
+        /* ========================================
+           商品內容
+           ======================================== */
+
+        /*
+         * 商品文字內容區域
+         * 使用 Flex 讓價格與按鈕可以自然排列
+         */
+        .product-content {
+            display: flex;
+            flex-direction: column;
+
+            flex: 1;
+
+            padding: 24px;
+        }
+
+
+        /* 商品分類 */
+        .product-category {
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #2563eb;
+
+            letter-spacing: 0.08em;
+        }
+
+
+        /* 商品名稱 */
+        .product-title {
+            margin-bottom: 10px;
+
+            font-size: 21px;
+
+            font-weight: 800;
+
+            color: #111827;
+        }
+
+
+        /* 商品描述 */
+        .product-description {
+            margin-bottom: 20px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        /* ========================================
+           商品價格
+           ======================================== */
+
+        /*
+         * 價格區域
+         * margin-top: auto 可以讓不同高度的商品內容
+         * 保持底部價格與按鈕對齊
+         */
+        .product-price {
+            margin-top: auto;
+
+            margin-bottom: 18px;
+
+            font-size: 26px;
+
+            font-weight: 900;
+
+            color: #111827;
+        }
+
+
+        /* 價格前面的貨幣符號 */
+        .product-price-symbol {
+            margin-right: 3px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            color: #6b7280;
+        }
+
+
+        /* ========================================
+           商品按鈕
+           ======================================== */
+
+        /*
+         * 商品 CTA 按鈕
+         * 使用 class 控制樣式
+         */
+        .product-button {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 50px;
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            background: #111827;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
+
+
+        /* 滑鼠移入按鈕 */
+        .product-button:hover {
+            background: #2563eb;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* ========================================
+           平板響應式設計
+           ======================================== */
+
+        /*
+         * 當螢幕寬度小於 900px
+         * 商品從 3 欄變成 2 欄
+         */
+        @media (max-width: 900px) {
+
+            .product-section {
+                /* 平板使用兩欄 */
+                grid-template-columns: repeat(2, 1fr);
+
+                /* 保留 24px Grid 間距 */
+                gap: 24px;
+
+                /* 減少上下留白 */
+                padding: 48px 24px;
+            }
+        }
+
+
+        /* ========================================
+           手機響應式設計
+           ======================================== */
+
+        /*
+         * 當螢幕寬度小於 600px
+         * 商品改成單欄排列
+         */
+        @media (max-width: 600px) {
+
+            .product-section {
+                /* 手機版使用單欄 */
+                grid-template-columns: 1fr;
+
+                /* 維持商品之間 24px 間距 */
+                gap: 24px;
+
+                /* 手機版縮小左右留白 */
+                padding: 36px 16px;
+            }
+
+
+            /* 手機版商品圖片區域稍微縮小 */
+            .product-image {
+                min-height: 190px;
+            }
+
+
+            /* 手機版商品內容縮小內距 */
+            .product-content {
+                padding: 20px;
+            }
+
+
+            /* 手機版商品名稱 */
+            .product-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ========================================
+         商品列表區塊開始
+         ======================================== -->
+
+    <!-- 
+        使用 section 作為最外層語義化容器
+        同時也是整個 CSS Grid 的主要容器
+    -->
+    <section class="product-section">
+
+
+        <!-- ========================================
+             商品 01：機械式鍵盤
+             ======================================== -->
+
+        <!-- 每一個商品必須使用 article -->
+        <article class="product-card">
+
+            <!-- 商品圖片展示區 -->
+            <div class="product-image">
+
+                <!-- 商品視覺圖示 -->
+                <div class="product-icon">
+                    ⌨
+                </div>
+
+            </div>
+
+
+            <!-- 商品文字內容 -->
+            <div class="product-content">
+
+                <!-- 商品分類 -->
+                <span class="product-category">
+                    KEYBOARD
+                </span>
+
+                <!-- 商品名稱 -->
+                <h2 class="product-title">
+                    RGB 機械式鍵盤
+                </h2>
+
+                <!-- 商品描述 -->
+                <p class="product-description">
+                    採用高回饋機械軸體，搭配全區 RGB 背光，
+                    適合遊戲與日常辦公使用。
+                </p>
+
+                <!-- 商品價格 -->
+                <div class="product-price">
+                    <span class="product-price-symbol">NT$</span>
+                    2,490
+                </div>
+
+                <!-- 商品 CTA -->
+                <a
+                    href="#"
+                    class="product-button"
+                >
+                    查看商品
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- ========================================
+             商品 02：電競滑鼠
+             ======================================== -->
+
+        <article class="product-card">
+
+            <!-- 商品圖片展示區 -->
+            <div class="product-image">
+
+                <!-- 商品視覺圖示 -->
+                <div class="product-icon">
+                    🖱
+                </div>
+
+            </div>
+
+
+            <!-- 商品文字內容 -->
+            <div class="product-content">
+
+                <!-- 商品分類 -->
+                <span class="product-category">
+                    GAMING MOUSE
+                </span>
+
+                <!-- 商品名稱 -->
+                <h2 class="product-title">
+                    Ultra 電競滑鼠
+                </h2>
+
+                <!-- 商品描述 -->
+                <p class="product-description">
+                    輕量化設計搭配高精度感測器，
+                    提供快速且穩定的遊戲操控體驗。
+                </p>
+
+                <!-- 商品價格 -->
+                <div class="product-price">
+                    <span class="product-price-symbol">NT$</span>
+                    1,890
+                </div>
+
+                <!-- 商品 CTA -->
+                <a
+                    href="#"
+                    class="product-button"
+                >
+                    查看商品
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- ========================================
+             商品 03：電競耳機
+             ======================================== -->
+
+        <article class="product-card">
+
+            <!-- 商品圖片展示區 -->
+            <div class="product-image">
+
+                <!-- 商品視覺圖示 -->
+                <div class="product-icon">
+                    🎧
+                </div>
+
+            </div>
+
+
+            <!-- 商品文字內容 -->
+            <div class="product-content">
+
+                <!-- 商品分類 -->
+                <span class="product-category">
+                    HEADSET
+                </span>
+
+                <!-- 商品名稱 -->
+                <h2 class="product-title">
+                    Pro 電競耳機
+                </h2>
+
+                <!-- 商品描述 -->
+                <p class="product-description">
+                    立體聲音場搭配降噪麥克風，
+                    精準掌握遊戲中的聲音細節。
+                </p>
+
+                <!-- 商品價格 -->
+                <div class="product-price">
+                    <span class="product-price-symbol">NT$</span>
+                    3,290
+                </div>
+
+                <!-- 商品 CTA -->
+                <a
+                    href="#"
+                    class="product-button"
+                >
+                    查看商品
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- ========================================
+             商品 04：人體工學滑鼠墊
+             ======================================== -->
+
+        <article class="product-card">
+
+            <!-- 商品圖片展示區 -->
+            <div class="product-image">
+
+                <!-- 商品視覺圖示 -->
+                <div class="product-icon">
+                    ▱
+                </div>
+
+            </div>
+
+
+            <!-- 商品文字內容 -->
+            <div class="product-content">
+
+                <!-- 商品分類 -->
+                <span class="product-category">
+                    MOUSE PAD
+                </span>
+
+                <!-- 商品名稱 -->
+                <h2 class="product-title">
+                    人體工學滑鼠墊
+                </h2>
+
+                <!-- 商品描述 -->
+                <p class="product-description">
+                    大尺寸桌面設計搭配滑順表面，
+                    提供穩定且舒適的滑鼠操作空間。
+                </p>
+
+                <!-- 商品價格 -->
+                <div class="product-price">
+                    <span class="product-price-symbol">NT$</span>
+                    890
+                </div>
+
+                <!-- 商品 CTA -->
+                <a
+                    href="#"
+                    class="product-button"
+                >
+                    查看商品
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- ========================================
+             商品 05：USB-C 擴充 Dock
+             ======================================== -->
+
+        <article class="product-card">
+
+            <!-- 商品圖片展示區 -->
+            <div class="product-image">
+
+                <!-- 商品視覺圖示 -->
+                <div class="product-icon">
+                    ▣
+                </div>
+
+            </div>
+
+
+            <!-- 商品文字內容 -->
+            <div class="product-content">
+
+                <!-- 商品分類 -->
+                <span class="product-category">
+                    USB-C DOCK
+                </span>
+
+                <!-- 商品名稱 -->
+                <h2 class="product-title">
+                    USB-C 多功能 Dock
+                </h2>
+
+                <!-- 商品描述 -->
+                <p class="product-description">
+                    集合 HDMI、USB 與高速傳輸介面，
+                    適合筆電與桌面工作站使用。
+                </p>
+
+                <!-- 商品價格 -->
+                <div class="product-price">
+                    <span class="product-price-symbol">NT$</span>
+                    2,190
+                </div>
+
+                <!-- 商品 CTA -->
+                <a
+                    href="#"
+                    class="product-button"
+                >
+                    查看商品
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- ========================================
+             商品 06：電競麥克風
+             ======================================== -->
+
+        <article class="product-card">
+
+            <!-- 商品圖片展示區 -->
+            <div class="product-image">
+
+                <!-- 商品視覺圖示 -->
+                <div class="product-icon">
+                    🎙
+                </div>
+
+            </div>
+
+
+            <!-- 商品文字內容 -->
+            <div class="product-content">
+
+                <!-- 商品分類 -->
+                <span class="product-category">
+                    MICROPHONE
+                </span>
+
+                <!-- 商品名稱 -->
+                <h2 class="product-title">
+                    Studio 電競麥克風
+                </h2>
+
+                <!-- 商品描述 -->
+                <p class="product-description">
+                    高解析收音搭配桌面支架，
+                    適合直播、遊戲語音與內容創作。
+                </p>
+
+                <!-- 商品價格 -->
+                <div class="product-price">
+                    <span class="product-price-symbol">NT$</span>
+                    2,790
+                </div>
+
+                <!-- 商品 CTA -->
+                <a
+                    href="#"
+                    class="product-button"
+                >
+                    查看商品
+                </a>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+    <!-- ========================================
+         商品列表區塊結束
+         ======================================== -->
+
+</body>
+</html>

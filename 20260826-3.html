@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PRO GEAR｜高效能電腦週邊</title>
+
+    <!-- ==================================================
+         CSS 樣式區
+         HTML 與 CSS 分離，HTML 元素不使用任何 inline style
+         ================================================== -->
+    <style>
+
+        /* ==================================================
+           CSS: 全域色彩管理
+           必須使用 :root 集中管理主要色彩
+           ================================================== */
+        :root {
+            --dark-bg: #111827;
+            --amber: #5CADAD;
+            --light-bg: #5CADAD;
+
+            /* 額外的輔助色彩變數 */
+            --white: #ffffff;
+            --text-dark: #1f2937;
+            --text-gray: #806b6e;
+            --border-color: #06122b;
+            --amber-light: #f59e0b;
+            --dark-card: #1f2937;
+        }
+
+
+        /* ==================================================
+           CSS: 基礎重置
+           ================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            font-family:
+                "Noto Sans TC",
+                "Microsoft JhengHei",
+                Arial,
+                sans-serif;
+
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+
+        /* ==================================================
+           CSS: 共用容器
+           ================================================== */
+        .container {
+            width: min(1120px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+
+        /* ==================================================
+           CSS: Header
+           
+           使用 Flexbox：
+           1. Logo 與報名按鈕兩端對齊
+           2. 垂直方向置中
+           ================================================== */
+        .site-header {
+            width: 100%;
+            background-color: var(--dark-bg);
+            color: var(--white);
+        }
+
+
+        .header-inner {
+            min-height: 72px;
+
+            display: flex;
+
+            /* Logo 與按鈕左右兩端對齊 */
+            justify-content: space-between;
+
+            /* 垂直軸線置中 */
+            align-items: center;
+
+            gap: 24px;
+        }
+
+
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+        }
+
+
+        .logo-mark {
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 8px;
+
+            background-color: var(--amber);
+            color: var(--white);
+
+            font-size: 0.9rem;
+        }
+
+
+        /* Header 報名按鈕 */
+        .header-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 42px;
+            padding: 0 20px;
+
+            border-radius: 8px;
+
+            background-color: var(--amber);
+            color: var(--white);
+
+            font-size: 0.95rem;
+            font-weight: 700;
+
+            transition:
+                background-color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+
+        .header-cta:hover {
+            background-color: var(--amber-light);
+            transform: translateY(-2px);
+        }
+
+
+        /* ==================================================
+           CSS: Hero 主視覺區
+           ================================================== */
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            padding: 100px 0;
+
+            background-color: var(--dark-bg);
+            color: var(--white);
+        }
+
+
+        /* 背景裝飾 */
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 420px;
+            height: 420px;
+
+            right: -120px;
+            top: -150px;
+
+            border-radius: 50%;
+
+            background-color: var(--amber);
+
+            opacity: 0.15;
+
+            filter: blur(20px);
+        }
+
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+
+            max-width: 760px;
+        }
+
+
+        .hero-label {
+            display: inline-block;
+
+            margin-bottom: 18px;
+            padding: 6px 12px;
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 999px;
+
+            color: #fbbf24;
+
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+
+        .hero-title {
+            margin-bottom: 24px;
+
+            font-size: clamp(2.5rem, 6vw, 4.8rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+        }
+
+
+        .hero-title span {
+            color: #fbbf24;
+        }
+
+
+        .hero-description {
+            max-width: 650px;
+
+            margin-bottom: 34px;
+
+            color: #d1d5db;
+
+            font-size: 1.1rem;
+        }
+
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+
+        .primary-button,
+        .secondary-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 48px;
+            padding: 0 24px;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+
+            transition:
+                transform 0.25s ease,
+                background-color 0.25s ease;
+        }
+
+
+        .primary-button {
+            background-color: var(--amber);
+            color: var(--white);
+        }
+
+
+        .primary-button:hover {
+            background-color: var(--amber-light);
+            transform: translateY(-2px);
+        }
+
+
+        .secondary-button {
+            border: 1px solid #4b5563;
+            color: var(--white);
+        }
+
+
+        .secondary-button:hover {
+            background-color: #374151;
+            transform: translateY(-2px);
+        }
+
+
+        /* ==================================================
+           CSS: 特色介紹區
+           
+           核心要求：
+           電腦版使用 CSS Grid
+           均分 3 欄
+           gap 必須為 24px
+           ================================================== */
+        .features-section {
+            padding: 88px 0;
+            background-color: var(--light-bg);
+        }
+
+
+        .section-heading {
+            max-width: 680px;
+            margin-bottom: 44px;
+        }
+
+
+        .section-label {
+            margin-bottom: 10px;
+
+            color: var(--amber);
+
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+        }
+
+
+        .section-title {
+            margin-bottom: 14px;
+
+            color: var(--dark-bg);
+
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.2;
+        }
+
+
+        .section-description {
+            color: var(--text-gray);
+        }
+
+
+        /* ==================================================
+           CSS: Grid 三欄特色卡片
+           ================================================== */
+        .features-grid {
+            display: grid;
+
+            /* 電腦版預設均分三欄 */
+            grid-template-columns: repeat(3, 1fr);
+
+            /* 指定欄位間距 24px */
+            gap: 24px;
+        }
+
+
+        .feature-card {
+            padding: 32px;
+
+            background-color: var(--white);
+
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 30px rgba(17, 24, 39, 0.06);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 18px 40px rgba(17, 24, 39, 0.1);
+        }
+
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 22px;
+
+            border-radius: 12px;
+
+            background-color: #fef3c7;
+            color: var(--amber);
+
+            font-size: 1.35rem;
+            font-weight: 900;
+        }
+
+
+        .feature-title {
+            margin-bottom: 12px;
+
+            color: var(--dark-bg);
+
+            font-size: 1.3rem;
+        }
+
+
+        .feature-text {
+            color: var(--text-gray);
+        }
+
+
+        /* ==================================================
+           CSS: 商品展示區
+           ================================================== */
+        .products-section {
+            padding: 88px 0;
+
+            background-color: #ffffff;
+        }
+
+
+        .product-list {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 24px;
+        }
+
+
+        .product-card {
+            overflow: hidden;
+
+            border-radius: 16px;
+
+            background-color: var(--dark-bg);
+            color: var(--white);
+        }
+
+
+        .product-visual {
+            min-height: 220px;
+
+            display: grid;
+            place-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #374151
+                );
+
+            font-size: 4rem;
+        }
+
+
+        /* ==================================================
+           CSS: 商品圖片
+           使用獨立圖片檔案呈現產品視覺
+           ================================================== */
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+
+        .product-content {
+            padding: 28px;
+        }
+
+
+        .product-name {
+            margin-bottom: 8px;
+
+            font-size: 1.4rem;
+        }
+
+
+        .product-description {
+            margin-bottom: 20px;
+
+            color: #d1d5db;
+        }
+
+
+        .product-footer {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        .product-price {
+            color: #fbbf24;
+
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+
+
+        .product-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 42px;
+            padding: 0 18px;
+
+            border-radius: 8px;
+
+            background-color: var(--amber);
+            color: var(--white);
+
+            font-weight: 700;
+        }
+
+
+        /* ==================================================
+           CSS: CTA 行動呼籲
+           ================================================== */
+        .cta-section {
+            padding: 80px 0;
+
+            background-color: var(--amber);
+            color: var(--white);
+
+            text-align: center;
+        }
+
+
+        .cta-content {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+
+        .cta-title {
+            margin-bottom: 16px;
+
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+
+
+        .cta-text {
+            margin-bottom: 28px;
+
+            color: #fef3c7;
+        }
+
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 50px;
+            padding: 0 28px;
+
+            border-radius: 8px;
+
+            background-color: var(--dark-bg);
+            color: var(--white);
+
+            font-weight: 800;
+
+            transition:
+                transform 0.25s ease,
+                background-color 0.25s ease;
+        }
+
+
+        .cta-button:hover {
+            background-color: #1f2937;
+            transform: translateY(-2px);
+        }
+
+
+        /* ==================================================
+           CSS: Footer
+           ================================================== */
+        .site-footer {
+            padding: 28px 0;
+
+            background-color: var(--dark-bg);
+            color: #9ca3af;
+
+            text-align: center;
+
+            font-size: 0.9rem;
+        }
+
+
+        /* ==================================================
+           CSS: 手機版 RWD
+           
+           核心要求：
+           max-width: 768px
+           Grid 自動退化為 1fr 單欄
+           ================================================== */
+        @media (max-width: 768px) {
+
+            /* 手機版容器縮小左右留白 */
+            .container {
+                width: min(100% - 28px, 1120px);
+            }
+
+
+            /* Header 手機版 */
+            .header-inner {
+                min-height: 64px;
+            }
+
+
+            .logo {
+                font-size: 1rem;
+            }
+
+
+            .header-cta {
+                min-height: 38px;
+                padding: 0 14px;
+
+                font-size: 0.85rem;
+            }
+
+
+            /* Hero 手機版 */
+            .hero {
+                padding: 72px 0;
+            }
+
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+
+            /* ==================================================
+               手機版 Grid：
+               三欄覆蓋成單欄
+               ================================================== */
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            /* 商品區也退化成單欄 */
+            .product-list {
+                grid-template-columns: 1fr;
+            }
+
+
+            .features-section,
+            .products-section {
+                padding: 64px 0;
+            }
+
+
+            .feature-card {
+                padding: 26px;
+            }
+
+
+            .product-visual {
+                min-height: 220px;
+            }
+
+
+            .product-image {
+                height: 220px;
+            }
+
+
+            .product-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+
+            .product-button {
+                width: 100%;
+            }
+
+
+            .cta-section {
+                padding: 64px 0;
+            }
+        }
+
+
+        /* ==================================================
+           CSS: 更小手機螢幕
+           ================================================== */
+        @media (max-width: 480px) {
+
+            .header-cta {
+                padding: 0 10px;
+
+                font-size: 0.8rem;
+            }
+
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+
+            .primary-button,
+            .secondary-button {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ==================================================
+         HTML: Header 導覽列
+         ================================================== -->
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <span class="logo-mark">PG</span>
+                <span>PRO GEAR</span>
+            </a>
+
+            <!-- 報名 / 購買按鈕 -->
+            <a href="#contact" class="header-cta">
+                立即選購
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================================================
+         HTML: Hero 主視覺區
+         ================================================== -->
+    <main>
+
+        <section class="hero">
+
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <p class="hero-label">
+                        PERFORMANCE COMPUTER GEAR
+                    </p>
+
+                    <h1 class="hero-title">
+                        讓每一次操作，
+                        <span>更精準。</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        為遊戲玩家、創作者與專業工作者打造的高效能電腦週邊。
+                        從滑鼠、鍵盤到桌面設備，讓你的工作與娛樂都獲得更好的操作體驗。
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="#products" class="primary-button">
+                            探索產品
+                        </a>
+
+                        <a href="#features" class="secondary-button">
+                            了解特色
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             HTML: 特色介紹區
+             ================================================== -->
+        <section class="features-section" id="features">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <p class="section-label">
+                        WHY PRO GEAR
+                    </p>
+
+                    <h2 class="section-title">
+                        為操作而生的細節
+                    </h2>
+
+                    <p class="section-description">
+                        我們從使用者真正接觸的每一個細節出發，
+                        將效能、舒適度與耐用性整合在一起。
+                    </p>
+
+                </div>
+
+
+                <!--
+                    核心 Grid 區塊
+                    電腦版：3 欄
+                    gap：24px
+                    手機版：1 欄
+                -->
+                <div class="features-grid">
+
+                    <!-- 特色一 -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            ⚡
+                        </div>
+
+                        <h3 class="feature-title">
+                            高速反應
+                        </h3>
+
+                        <p class="feature-text">
+                            針對遊戲與高頻率操作進行最佳化，
+                            讓每一次點擊與移動都能快速回應。
+                        </p>
+
+                    </article>
+
+
+                    <!-- 特色二 -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            ◈
+                        </div>
+
+                        <h3 class="feature-title">
+                            精準控制
+                        </h3>
+
+                        <p class="feature-text">
+                            從感測器到按鍵回饋，每個細節都經過調校，
+                            提供穩定且一致的操作感。
+                        </p>
+
+                    </article>
+
+
+                    <!-- 特色三 -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            ◆
+                        </div>
+
+                        <h3 class="feature-title">
+                            長時間舒適
+                        </h3>
+
+                        <p class="feature-text">
+                            人體工學設計搭配耐用材質，
+                            適合長時間遊戲、工作與創作使用。
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             HTML: 商品展示區
+             ================================================== -->
+        <section class="products-section" id="products">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <p class="section-label">
+                        FEATURED GEAR
+                    </p>
+
+                    <h2 class="section-title">
+                        精選核心設備
+                    </h2>
+
+                    <p class="section-description">
+                        從桌面開始升級你的操作體驗。
+                    </p>
+
+                </div>
+
+
+                <div class="product-list">
+
+                    <!-- 商品一：高精度電競滑鼠 -->
+                    <article class="product-card">
+
+                        <div class="product-visual">
+                            <img
+                                class="product-image"
+                                src="pro-gear-landing-page/products/pro-mouse-x1.png"
+                                alt="PRO MOUSE X1 高精度電競滑鼠"
+                            >
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                PRO MOUSE X1
+                            </h3>
+
+                            <p class="product-description">
+                                輕量化高精度電競滑鼠，
+                                適合需要快速移動與精準控制的使用者。
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    NT$ 2,490
+                                </span>
+
+                                <a href="#contact" class="product-button">
+                                    立即選購
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 商品二：機械式電競鍵盤 -->
+                    <article class="product-card">
+
+                        <div class="product-visual">
+                            <img
+                                class="product-image\"
+                                src="pro-gear-landing-page/products/pro-keyboard-k1.png"
+                                alt="PRO KEYBOARD K1 機械式電競鍵盤"
+                            >
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                PRO KEYBOARD K1
+                            </h3>
+
+                            <p class="product-description">
+                                機械式鍵盤搭配俐落按鍵回饋，
+                                適合遊戲、程式開發與日常工作。
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    NT$ 3,290
+                                </span>
+
+                                <a href="#contact" class="product-button">
+                                    立即選購
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 商品三：7.1 聲道電競耳機 -->
+                    <article class="product-card">
+
+                        <div class="product-visual">
+                            <img
+                                class="product-image"
+                                src="pro-gear-landing-page/products/pro-headset-h7.png"
+                                alt="PRO HEADSET H7 7.1 聲道電競耳機"
+                            >
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                PRO HEADSET H7
+                            </h3>
+
+                            <p class="product-description">
+                                7.1 聲道電競耳機，清晰定位遊戲聲音，
+                                並提供舒適的長時間配戴體驗。
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    NT$ 2,690
+                                </span>
+
+                                <a href="#contact" class="product-button">
+                                    立即選購
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 商品四：加大型滑鼠墊 -->
+                    <article class="product-card">
+
+                        <div class="product-visual">
+                            <img
+                                class="product-image"
+                                src="pro-gear-landing-page/products/pro-mousepad-xl.png"
+                                alt="PRO MOUSEPAD XL 加大型電競滑鼠墊"
+                            >
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                PRO MOUSEPAD XL
+                            </h3>
+
+                            <p class="product-description">
+                                防滑底面與精準布面材質，
+                                讓滑鼠移動更穩定、更順暢。
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    NT$ 690
+                                </span>
+
+                                <a href="#contact" class="product-button">
+                                    立即選購
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 商品五：滑鼠線材固定器 -->
+                    <article class="product-card">
+
+                        <div class="product-visual">
+                            <img
+                                class="product-image"
+                                src="pro-gear-landing-page/products/mouse-bungee-b1.png"
+                                alt="MOUSE BUNGEE B1 滑鼠線材固定器"
+                            >
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                MOUSE BUNGEE B1
+                            </h3>
+
+                            <p class="product-description">
+                                減少線材拖曳阻力，讓滑鼠移動更加自由，
+                                保持遊戲操作順暢無阻。
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    NT$ 590
+                                </span>
+
+                                <a href="#contact" class="product-button">
+                                    立即選購
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 商品六：USB 多功能 Hub -->
+                    <article class="product-card">
+
+                        <div class="product-visual">
+                            <img
+                                class="product-image"
+                                src="pro-gear-landing-page/products/usb-hub-z1.png"
+                                alt="USB HUB Z1 多功能 USB 集線器"
+                            >
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                USB HUB Z1
+                            </h3>
+
+                            <p class="product-description">
+                                多功能擴充集線器，提供多組 USB 連接埠，
+                                滿足鍵盤、滑鼠與桌面設備的擴充需求。
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    NT$ 1,290
+                                </span>
+
+                                <a href="#contact" class="product-button">
+                                    立即選購
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             HTML: CTA 行動呼籲區
+             ================================================== -->
+        <section class="cta-section" id="contact">
+
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2 class="cta-title">
+                        準備升級你的桌面了嗎？
+                    </h2>
+
+                    <p class="cta-text">
+                        選擇適合你的電腦週邊，讓每一次操作都更有效率。
+                    </p>
+
+                    <a href="#products" class="cta-button">
+                        查看完整產品
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==================================================
+         HTML: Footer
+         ================================================== -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                © 2026 PRO GEAR. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ==================================================
+         JavaScript 區
+         目前此 Landing Page 不需要複雜互動，
+         因此不額外加入 JavaScript。
+         ================================================== -->
+
+</body>
+</html>
